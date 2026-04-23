@@ -94,6 +94,27 @@
             </div>
             <div id="decisionInsight" class="insight-box">Select an answer to see the likely trade-off and consequence pattern.</div>
           </div>
+
+          <div id="overallDashboardPanel" class="panel final-dashboard hidden">
+            <div class="section-title-row">
+              <h3>Overall Decision-Making Dashboard</h3>
+              <span class="pill pill-accent">Post review</span>
+            </div>
+            <p class="muted">Spider web chart highlights decision-making strengths (lower detriment) and weaknesses (higher detriment) across strategic pillars.</p>
+            <div class="radar-wrap">
+              <canvas id="overallRadarChart" width="430" height="360" aria-label="Decision making spider web chart"></canvas>
+            </div>
+            <div class="strength-weakness-grid">
+              <div class="insight-box">
+                <strong>Strengths</strong>
+                <ul id="strengthList" class="bullet-list"></ul>
+              </div>
+              <div class="insight-box">
+                <strong>Weaknesses</strong>
+                <ul id="weaknessList" class="bullet-list"></ul>
+              </div>
+            </div>
+          </div>
         </section>
 
         <aside class="panel dashboard-panel">
@@ -115,14 +136,24 @@
             </div>
           </div>
 
-          <div>
-            <h4 class="subheading">Pillar heatmap</h4>
-            <div id="pillarBars" class="pillar-bars"></div>
+          <div class="collapsible-card">
+            <button type="button" class="subheading collapsible-toggle" id="pillarHeatmapToggle" aria-expanded="true" aria-controls="pillarHeatmapBody">
+              <span>Pillar heatmap</span>
+              <span class="collapse-icon">▾</span>
+            </button>
+            <div id="pillarHeatmapBody" class="collapsible-body is-open">
+              <div id="pillarBars" class="pillar-bars"></div>
+            </div>
           </div>
 
-          <div>
-            <h4 class="subheading">Secondary impact monitor</h4>
-            <div id="secondaryImpactGrid" class="secondary-grid"></div>
+          <div class="collapsible-card">
+            <button type="button" class="subheading collapsible-toggle" id="secondaryImpactToggle" aria-expanded="true" aria-controls="secondaryImpactBody">
+              <span>Secondary impact monitor</span>
+              <span class="collapse-icon">▾</span>
+            </button>
+            <div id="secondaryImpactBody" class="collapsible-body is-open">
+              <div id="secondaryImpactGrid" class="secondary-grid"></div>
+            </div>
           </div>
 
           <div>

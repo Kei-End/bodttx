@@ -43,13 +43,20 @@ const miniPillarGrid = document.getElementById('miniPillarGrid');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const resetSessionBtn = document.getElementById('resetSessionBtn');
+const pillarHeatmapToggle = document.getElementById('pillarHeatmapToggle');
+const secondaryImpactToggle = document.getElementById('secondaryImpactToggle');
+const overallDashboardPanel = document.getElementById('overallDashboardPanel');
+const overallRadarChart = document.getElementById('overallRadarChart');
+const strengthList = document.getElementById('strengthList');
+const weaknessList = document.getElementById('weaknessList');
 
 let scenarioLibrary = [];
 let activeScenario = null;
 let state = {
   participant: '',
   index: 0,
-  answers: {}
+  answers: {},
+  completedReview: false
 };
 
 async function boot() {
@@ -62,6 +69,7 @@ async function boot() {
   populateScenarioSelect();
   hydrateSession();
   renderStaticDashboardShell();
+  setupCollapsibleSections();
 }
 
 function populateScenarioSelect() {
@@ -80,7 +88,12 @@ function hydrateSession() {
   try {
     const parsed = JSON.parse(saved);
     if (parsed && parsed.participant) {
-      state = parsed;
+      state = {
+        participant: parsed.participant || '',
+        index: parsed.index || 0,
+        answers: parsed.answers || {},
+        completedReview: Boolean(parsed.completedReview)
+      };
       const scenario = scenarioLibrary.find(s => s.meta.id === parsed.scenarioId);
       if (scenario) {
         activeScenario = scenario;
@@ -103,7 +116,7 @@ function persistSession() {
 
 function resetSession() {
   sessionStorage.removeItem('boardroomTTXSession');
-  state = { participant: '', index: 0, answers: {} };
+  state = { participant: '', index: 0, answers: {}, completedReview: false };
   activeScenario = null;
   exerciseView.classList.add('hidden');
   loginView.classList.remove('hidden');
@@ -139,23 +152,42 @@ function renderStaticDashboardShell() {
   `).join('');
 }
 
+function setupCollapsibleSections() {
+  bindCollapsible(pillarHeatmapToggle);
+  bindCollapsible(secondaryImpactToggle);
+}
+
+function bindCollapsible(toggle) {
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const bodyId = toggle.getAttribute('aria-controls');
+    const body = document.getElementById(bodyId);
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isExpanded));
+    body?.classList.toggle('is-open', !isExpanded);
+  });
+}
+
 function renderAll() {
   participantLabel.textContent = state.participant;
   scenarioTitle.textContent = activeScenario.meta.title;
   scenarioSummary.textContent = activeScenario.meta.summary;
   renderQuestion();
   renderDashboard();
+  renderOverallDecisionDashboard();
 }
 
 function renderQuestion() {
   const question = activeScenario.questions[state.index];
+  const isLastQuestion = state.index === activeScenario.questions.length - 1;
+
   questionNumber.textContent = `Question ${state.index + 1} of ${activeScenario.questions.length}`;
   questionText.textContent = question.text;
   questionContext.textContent = question.context || 'Consider the trade-off across national interest, operational continuity, and public confidence.';
   progressText.textContent = `${state.index + 1} / ${activeScenario.questions.length}`;
   progressBar.style.width = `${((state.index + 1) / activeScenario.questions.length) * 100}%`;
   prevBtn.disabled = state.index === 0;
-  nextBtn.textContent = state.index === activeScenario.questions.length - 1 ? 'Finish Review' : 'Next';
+  nextBtn.textContent = isLastQuestion ? 'Finish Review' : 'Next';
 
   const selectedAnswerId = state.answers[question.id]?.answerId;
   answerList.innerHTML = question.answers.map(answer => {
@@ -192,10 +224,12 @@ function renderQuestion() {
 function selectAnswer(question, answerId) {
   const answer = question.answers.find(a => a.id === answerId);
   state.answers[question.id] = { answerId };
+  state.completedReview = false;
   persistSession();
   renderQuestion();
   renderInsight(answer);
   renderDashboard();
+  renderOverallDecisionDashboard();
 }
 
 function renderInsight(answer) {
@@ -218,8 +252,12 @@ function aggregateScores() {
     const chosen = state.answers[question.id];
     if (!chosen) return;
     const answer = question.answers.find(a => a.id === chosen.answerId);
-    PILLARS.forEach(p => totals.pillars[p.key] += (answer.weights?.pillars?.[p.key] || 0));
-    SECONDARY.forEach(s => totals.secondary[s.key] += (answer.weights?.secondary?.[s.key] || 0));
+    PILLARS.forEach(p => {
+      totals.pillars[p.key] += (answer.weights?.pillars?.[p.key] || 0);
+    });
+    SECONDARY.forEach(s => {
+      totals.secondary[s.key] += (answer.weights?.secondary?.[s.key] || 0);
+    });
     totals.confidence += (answer.confidence || 0);
     totals.log.push({
       title: `Q${idx + 1}: ${question.shortLabel || 'Decision point'}`,
@@ -236,7 +274,7 @@ function renderDashboard() {
   const maxPillar = Math.max(1, ...Object.values(totals.pillars));
   const maxSecondary = Math.max(1, ...Object.values(totals.secondary));
   const answeredCount = Object.keys(state.answers).length;
-  const detriment = Math.round(Object.values(totals.pillars).reduce((a,b) => a + b, 0) / Math.max(1, answeredCount));
+  const detriment = Math.round(Object.values(totals.pillars).reduce((a, b) => a + b, 0) / Math.max(1, answeredCount));
   const confidence = Math.max(0, Math.round(totals.confidence / Math.max(1, answeredCount)));
 
   nationalScore.textContent = detriment;
@@ -274,11 +312,112 @@ function renderDashboard() {
     : '<div class="log-item"><p>No decisions recorded yet.</p></div>';
 }
 
+function renderOverallDecisionDashboard() {
+  if (!state.completedReview) {
+    overallDashboardPanel.classList.add('hidden');
+    return;
+  }
+
+  const totals = aggregateScores();
+  const values = PILLARS.map(p => totals.pillars[p.key]);
+  const maxValue = Math.max(10, ...values);
+  const normalized = values.map(value => Math.max(0, Math.min(1, value / maxValue)));
+
+  drawSpiderChart(PILLARS.map(p => p.label), normalized, values);
+
+  const ranked = PILLARS.map((p, idx) => ({ label: p.label, value: values[idx] }))
+    .sort((a, b) => a.value - b.value);
+
+  strengthList.innerHTML = ranked
+    .slice(0, 3)
+    .map(item => `<li>${item.label}: ${item.value} (relative strength)</li>`)
+    .join('');
+
+  weaknessList.innerHTML = ranked
+    .slice(-3)
+    .reverse()
+    .map(item => `<li>${item.label}: ${item.value} (needs stronger controls)</li>`)
+    .join('');
+
+  overallDashboardPanel.classList.remove('hidden');
+}
+
+function drawSpiderChart(labels, normalizedValues, rawValues) {
+  const ctx = overallRadarChart.getContext('2d');
+  const width = overallRadarChart.width;
+  const height = overallRadarChart.height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = Math.min(width, height) * 0.33;
+  const rings = 5;
+
+  ctx.clearRect(0, 0, width, height);
+
+  // grid rings
+  for (let r = 1; r <= rings; r += 1) {
+    const factor = r / rings;
+    ctx.beginPath();
+    labels.forEach((_, i) => {
+      const angle = (Math.PI * 2 * i) / labels.length - Math.PI / 2;
+      const x = centerX + Math.cos(angle) * radius * factor;
+      const y = centerY + Math.sin(angle) * radius * factor;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // spokes and labels
+  labels.forEach((label, i) => {
+    const angle = (Math.PI * 2 * i) / labels.length - Math.PI / 2;
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+    const tx = centerX + Math.cos(angle) * (radius + 28);
+    const ty = centerY + Math.sin(angle) * (radius + 28);
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#b7c8e3';
+    ctx.font = '12px Inter';
+    ctx.textAlign = tx < centerX - 12 ? 'right' : tx > centerX + 12 ? 'left' : 'center';
+    ctx.fillText(`${label} (${rawValues[i]})`, tx, ty);
+  });
+
+  // data polygon
+  ctx.beginPath();
+  normalizedValues.forEach((value, i) => {
+    const angle = (Math.PI * 2 * i) / labels.length - Math.PI / 2;
+    const x = centerX + Math.cos(angle) * radius * value;
+    const y = centerY + Math.sin(angle) * radius * value;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(59,162,255,0.28)';
+  ctx.strokeStyle = '#68e1fd';
+  ctx.lineWidth = 2;
+  ctx.fill();
+  ctx.stroke();
+}
+
+function allQuestionsAnswered() {
+  if (!activeScenario) return false;
+  return activeScenario.questions.every(question => Boolean(state.answers[question.id]));
+}
+
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   state.participant = displayNameInput.value.trim();
   state.index = 0;
   state.answers = {};
+  state.completedReview = false;
   activeScenario = scenarioLibrary[Number(scenarioSelect.value)] || scenarioLibrary[0];
   persistSession();
   showExercise();
@@ -311,12 +450,28 @@ function validateScenario(json) {
 
 prevBtn.addEventListener('click', () => {
   state.index = Math.max(0, state.index - 1);
+  state.completedReview = false;
   persistSession();
   renderQuestion();
+  renderOverallDecisionDashboard();
 });
 
 nextBtn.addEventListener('click', () => {
+  const isLastQuestion = state.index === activeScenario.questions.length - 1;
+
+  if (isLastQuestion) {
+    if (!allQuestionsAnswered()) {
+      alert('Please answer all decision points before finishing the review.');
+      return;
+    }
+    state.completedReview = true;
+    persistSession();
+    renderOverallDecisionDashboard();
+    return;
+  }
+
   state.index = Math.min(activeScenario.questions.length - 1, state.index + 1);
+  state.completedReview = false;
   persistSession();
   renderQuestion();
 });
