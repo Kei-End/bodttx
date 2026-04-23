@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "id": "demo-fragment",
+    "title": "Demo Fragment",
+    "summary": "Fixture fragment"
+  },
+  "decisionDeadlineSeconds": 600,
+  "criticalFactsAvailable": ["fact-a"],
+  "expectedPrinciples": ["life-safety-first"],
+  "stakeholderGroups": ["customers", "vulnerableGroups"],
+  "safetyPriorities": ["life", "vulnerableGroups"],
+  "questions": [
+    {
+      "id": "qx",
+      "text": "Fixture question",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Option",
+          "description": "desc",
+          "consequence": "consequence",
+          "boardReading": "reading",
+          "confidence": 20,
+          "weights": {
+            "pillars": {"security": 1},
+            "secondary": {"reputation": 1}
+          }
+        }
+      ]
+    },
+    {
+      "id": "qy",
+      "text": "Fixture question 2",
+      "answers": [{"id":"a2","label":"Option2","description":"d","consequence":"c","boardReading":"r","confidence":10,"weights":{"pillars":{"security":1},"secondary":{"reputation":1}}}]
+    }
+  ]
+}

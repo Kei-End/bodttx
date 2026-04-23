@@ -1,0 +1,22 @@
+{
+  "participant": "Chief Executive",
+  "scenarioId": "national-payment-grid-ransomware",
+  "decisionRecords": [
+    {
+      "decisionId": "national-payment-grid-ransomware:q1:Chief Executive",
+      "injectId": "q1",
+      "selectedOptionId": "q1a",
+      "scoreBreakdown": {
+        "situationalAwareness": 5,
+        "alignmentWithPrinciples": 4,
+        "ethicalSafetyImpact": 4,
+        "decisiveness": 4,
+        "transparency": 5
+      },
+      "confidenceBreakdown": {
+        "overall": 0.86
+      },
+      "validationFlags": ["noReviewTrigger"]
+    }
+  ]
+}
