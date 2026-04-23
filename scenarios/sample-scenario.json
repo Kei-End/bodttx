@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "id": "national-payment-grid-ransomware",
+    "title": "National Payment Grid Under Ransomware Pressure",
+    "summary": "A major payment switch serving banks, fuel retail, hospitals, and government collection channels is degraded by a ransomware-linked intrusion. Public concern is rising, media pressure is mounting, and cross-sector disruption is beginning to widen.",
+    "sector": "Financial services / NCII",
+    "difficulty": "Boardroom"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "shortLabel": "Public disclosure timing",
+      "text": "The crisis team confirms service instability and possible lateral movement. What public posture should leadership take in the first hour?",
+      "context": "Markets, government stakeholders, and the public are watching closely. Early signals will shape trust and tempo.",
+      "answers": [
+        {
+          "id": "q1a",
+          "label": "Issue a controlled early holding statement",
+          "description": "Acknowledge disruption, advise that services are being stabilised, and commit to regular updates while preserving forensic discipline.",
+          "leadershipSignal": "Measured",
+          "tempo": "Fast",
+          "visibility": "High",
+          "confidence": 24,
+          "boardReading": "This steadies the narrative and reduces rumour risk, though it may expose leadership to sharper scrutiny if recovery slows.",
+          "consequence": "Public trust is protected better, but reputational exposure begins immediately and the media cycle accelerates.",
+          "weights": {
+            "pillars": {"security": 8, "defence": 2, "foreign_relations": 3, "economy": 9, "public_health": 4, "public_safety": 4, "public_order": 6, "government_function": 7},
+            "secondary": {"reputation": 8, "monetary": 5, "market_share": 4, "public_trust": 3, "foreign_investment": 4}
+          }
+        },
+        {
+          "id": "q1b",
+          "label": "Stay silent until technical certainty is higher",
+          "description": "Delay external communication until the incident scope, actor, and operational impact are better understood.",
+          "leadershipSignal": "Cautious",
+          "tempo": "Slow",
+          "visibility": "Low",
+          "confidence": 15,
+          "boardReading": "This protects accuracy, yet silence can be read as indecision or concealment once disruption becomes visible externally.",
+          "consequence": "Forensic clarity improves, but public trust may fall faster if customers discover the issue before leadership speaks.",
+          "weights": {
+            "pillars": {"security": 6, "defence": 1, "foreign_relations": 2, "economy": 12, "public_health": 5, "public_safety": 5, "public_order": 9, "government_function": 8},
+            "secondary": {"reputation": 12, "monetary": 7, "market_share": 6, "public_trust": 10, "foreign_investment": 7}
+          }
+        },
+        {
+          "id": "q1c",
+          "label": "Blame a supplier before facts are complete",
+          "description": "Signal that the outage stems from a third-party service problem and avoid discussion of a cyber compromise.",
+          "leadershipSignal": "Deflective",
+          "tempo": "Fast",
+          "visibility": "High",
+          "confidence": 8,
+          "boardReading": "This may buy a short breathing space, but credibility damage becomes sharp if later evidence contradicts the statement.",
+          "consequence": "Narrative control is brief, but reputational and trust damage may deepen once the true cause emerges.",
+          "weights": {
+            "pillars": {"security": 10, "defence": 2, "foreign_relations": 5, "economy": 14, "public_health": 6, "public_safety": 7, "public_order": 12, "government_function": 10},
+            "secondary": {"reputation": 18, "monetary": 9, "market_share": 8, "public_trust": 17, "foreign_investment": 10}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "shortLabel": "Operational continuity",
+      "text": "Payment transaction latency is worsening. Which continuity action does the board back?",
+      "context": "Fuel stations, hospital billing counters, and public revenue services are now reporting degradation.",
+      "answers": [
+        {
+          "id": "q2a",
+          "label": "Shift to controlled degraded mode",
+          "description": "Preserve essential services through reduced throughput, manual verification, and priority routing for critical sectors.",
+          "leadershipSignal": "Disciplined",
+          "tempo": "Moderate",
+          "visibility": "Medium",
+          "confidence": 26,
+          "boardReading": "This accepts pain in convenience to defend continuity of essential services and national confidence.",
+          "consequence": "Transaction speed slows, but critical service delivery is preserved more steadily across essential sectors.",
+          "weights": {
+            "pillars": {"security": 7, "defence": 2, "foreign_relations": 2, "economy": 7, "public_health": 3, "public_safety": 3, "public_order": 4, "government_function": 5},
+            "secondary": {"reputation": 5, "monetary": 6, "market_share": 4, "public_trust": 4, "foreign_investment": 3}
+          }
+        },
+        {
+          "id": "q2b",
+          "label": "Keep full service running at all cost",
+          "description": "Maintain all channels open while technical teams work in parallel to contain the intrusion.",
+          "leadershipSignal": "Aggressive",
+          "tempo": "Fast",
+          "visibility": "Medium",
+          "confidence": 13,
+          "boardReading": "This protects short-term convenience, yet it risks widening compromise and harder downstream disruption.",
+          "consequence": "The public sees less immediate disruption, but the chance of deeper service failure rises.",
+          "weights": {
+            "pillars": {"security": 16, "defence": 2, "foreign_relations": 3, "economy": 13, "public_health": 7, "public_safety": 8, "public_order": 8, "government_function": 9},
+            "secondary": {"reputation": 8, "monetary": 12, "market_share": 7, "public_trust": 8, "foreign_investment": 6}
+          }
+        },
+        {
+          "id": "q2c",
+          "label": "Temporarily suspend the platform nationwide",
+          "description": "Take the core switch offline for containment and integrity recovery.",
+          "leadershipSignal": "Severe",
+          "tempo": "Fast",
+          "visibility": "High",
+          "confidence": 19,
+          "boardReading": "This may shorten technical risk, yet it imposes broad national friction and may trigger panic behaviour.",
+          "consequence": "Security containment improves, but service disruption spreads quickly across the economy and public order domain.",
+          "weights": {
+            "pillars": {"security": 5, "defence": 2, "foreign_relations": 3, "economy": 18, "public_health": 10, "public_safety": 9, "public_order": 15, "government_function": 12},
+            "secondary": {"reputation": 10, "monetary": 18, "market_share": 9, "public_trust": 10, "foreign_investment": 9}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "shortLabel": "State engagement",
+      "text": "Should the organisation escalate immediately to whole-of-government coordination channels?",
+      "context": "The matter is beginning to touch payment access, logistics, and public service delivery at scale.",
+      "answers": [
+        {
+          "id": "q3a",
+          "label": "Escalate early and share a disciplined operational picture",
+          "description": "Engage sector leadership and national coordination bodies with a concise factual brief and priority needs.",
+          "leadershipSignal": "Responsible",
+          "tempo": "Fast",
+          "visibility": "Controlled",
+          "confidence": 28,
+          "boardReading": "This strengthens unity of effort and gives government the room to help before wider harm sets in.",
+          "consequence": "Coordination burden increases, but national response alignment improves and downstream harm may be reduced.",
+          "weights": {
+            "pillars": {"security": 5, "defence": 3, "foreign_relations": 2, "economy": 6, "public_health": 3, "public_safety": 3, "public_order": 4, "government_function": 4},
+            "secondary": {"reputation": 4, "monetary": 5, "market_share": 3, "public_trust": 3, "foreign_investment": 3}
+          }
+        },
+        {
+          "id": "q3b",
+          "label": "Keep it internal until customer harm becomes undeniable",
+          "description": "Reserve escalation so the organisation can try to resolve the crisis without wider state involvement.",
+          "leadershipSignal": "Insular",
+          "tempo": "Slow",
+          "visibility": "Low",
+          "confidence": 11,
+          "boardReading": "This may feel controlled, but it narrows the room for coordinated national protection measures.",
+          "consequence": "Escalation burden is avoided, yet national preparedness and response synchronisation weaken.",
+          "weights": {
+            "pillars": {"security": 10, "defence": 4, "foreign_relations": 4, "economy": 11, "public_health": 6, "public_safety": 6, "public_order": 9, "government_function": 10},
+            "secondary": {"reputation": 11, "monetary": 8, "market_share": 6, "public_trust": 12, "foreign_investment": 7}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "shortLabel": "Ransom demand",
+      "text": "The attacker delivers a ransom demand with a proof-of-access sample. How should the board frame the next move?",
+      "context": "Pressure is rising because essential transactions remain unstable and customer anxiety is growing.",
+      "answers": [
+        {
+          "id": "q4a",
+          "label": "Reject payment and focus on containment, restoration, and law enforcement support",
+          "description": "Maintain principled refusal while accelerating recovery and communication discipline.",
+          "leadershipSignal": "Firm",
+          "tempo": "Measured",
+          "visibility": "High",
+          "confidence": 25,
+          "boardReading": "This preserves long-term posture and credibility, though short-term business pain may rise.",
+          "consequence": "Recovery may be harder in the near term, but extortion exposure and future coercion risk are reduced.",
+          "weights": {
+            "pillars": {"security": 7, "defence": 3, "foreign_relations": 2, "economy": 10, "public_health": 5, "public_safety": 5, "public_order": 6, "government_function": 7},
+            "secondary": {"reputation": 6, "monetary": 10, "market_share": 5, "public_trust": 5, "foreign_investment": 4}
+          }
+        },
+        {
+          "id": "q4b",
+          "label": "Quietly explore payment while publicly denying it",
+          "description": "Seek a fast service recovery path while managing perception risk through restricted internal handling.",
+          "leadershipSignal": "Expedient",
+          "tempo": "Fast",
+          "visibility": "Low",
+          "confidence": 9,
+          "boardReading": "This may seem practical, but it creates major credibility, legal, and precedent risks if exposed.",
+          "consequence": "A quicker restoration path may emerge, yet trust, reputation, and future coercion risk may worsen sharply.",
+          "weights": {
+            "pillars": {"security": 14, "defence": 3, "foreign_relations": 5, "economy": 12, "public_health": 6, "public_safety": 6, "public_order": 8, "government_function": 9},
+            "secondary": {"reputation": 18, "monetary": 14, "market_share": 9, "public_trust": 18, "foreign_investment": 11}
+          }
+        },
+        {
+          "id": "q4c",
+          "label": "Authorise payment openly as a business continuity measure",
+          "description": "Declare that payment is necessary to restore essential services quickly.",
+          "leadershipSignal": "Transactional",
+          "tempo": "Fast",
+          "visibility": "High",
+          "confidence": 12,
+          "boardReading": "This may calm some customers in the immediate moment, yet it raises strong strategic and signalling concerns.",
+          "consequence": "Speed may improve, but precedent, moral hazard, and public confidence in governance may erode.",
+          "weights": {
+            "pillars": {"security": 17, "defence": 4, "foreign_relations": 6, "economy": 10, "public_health": 5, "public_safety": 5, "public_order": 7, "government_function": 8},
+            "secondary": {"reputation": 15, "monetary": 16, "market_share": 7, "public_trust": 14, "foreign_investment": 10}
+          }
+        }
+      ]
+    }
+  ]
+}

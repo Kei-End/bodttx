@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boardroom TTX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">Stateless boardroom simulator</div>
+        <h1>Cyber Crisis TTX</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="resetSessionBtn" class="btn btn-ghost">Reset Session</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section id="loginView" class="panel hero-panel active-view">
+        <div class="hero-copy">
+          <span class="pill pill-accent">Executive exercise</span>
+          <h2>Action, consequence, and national detriment.</h2>
+          <p>This boardroom table-top app is built for CEO and Board-level cyber crisis discussion. It does not mark decisions as right or wrong. It shows how each choice shapes national detriment, service delivery, public trust, financial strain, and market confidence.</p>
+        </div>
+
+        <form id="loginForm" class="login-card">
+          <div class="card-title">Start Session</div>
+          <label>
+            <span>Name or role</span>
+            <input id="displayName" type="text" placeholder="Chief Executive, Board Chair, Crisis Director" required maxlength="60" />
+          </label>
+          <label>
+            <span>Scenario bank</span>
+            <select id="scenarioSelect"></select>
+          </label>
+          <div class="upload-box">
+            <label for="scenarioUpload" class="upload-label">Or load your own scenario JSON</label>
+            <input id="scenarioUpload" type="file" accept="application/json" />
+            <small>Nothing is stored. Custom scenarios remain in this browser session only.</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-wide">Enter Exercise</button>
+        </form>
+      </section>
+
+      <section id="exerciseView" class="exercise-grid hidden">
+        <aside class="panel sidebar">
+          <div class="scenario-meta">
+            <span class="pill">Scenario</span>
+            <h3 id="scenarioTitle">-</h3>
+            <p id="scenarioSummary">-</p>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-header">
+              <span>Progress</span>
+              <span id="progressText">0 / 0</span>
+            </div>
+            <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+          </div>
+
+          <div class="impact-mini-grid" id="miniPillarGrid"></div>
+
+          <div class="session-card">
+            <div class="session-label">Participant</div>
+            <div id="participantLabel" class="session-value">-</div>
+          </div>
+        </aside>
+
+        <section class="main-column">
+          <div class="panel question-panel">
+            <div class="question-topline">
+              <span class="pill pill-accent" id="questionStage">Decision Point</span>
+              <span id="questionNumber">Question 1</span>
+            </div>
+            <h2 id="questionText">-</h2>
+            <p id="questionContext" class="muted">-</p>
+            <div id="answerList" class="answer-list"></div>
+            <div class="question-nav">
+              <button id="prevBtn" class="btn btn-ghost">Previous</button>
+              <button id="nextBtn" class="btn btn-primary">Next</button>
+            </div>
+          </div>
+
+          <div class="panel consequence-panel">
+            <div class="section-title-row">
+              <h3>Immediate decision reading</h3>
+              <span class="pill pill-neutral">Session only</span>
+            </div>
+            <div id="decisionInsight" class="insight-box">Select an answer to see the likely trade-off and consequence pattern.</div>
+          </div>
+        </section>
+
+        <aside class="panel dashboard-panel">
+          <div class="section-title-row">
+            <h3>Detriment Dashboard</h3>
+            <span class="pill pill-danger">Act 854 lens</span>
+          </div>
+
+          <div class="score-overview">
+            <div class="score-card">
+              <span class="score-label">National Detriment Score</span>
+              <strong id="nationalScore">0</strong>
+              <small id="nationalBand">Low</small>
+            </div>
+            <div class="score-card">
+              <span class="score-label">Confidence Index</span>
+              <strong id="confidenceScore">0</strong>
+              <small>Clarity of direction and leadership signalling</small>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="subheading">Pillar heatmap</h4>
+            <div id="pillarBars" class="pillar-bars"></div>
+          </div>
+
+          <div>
+            <h4 class="subheading">Secondary impact monitor</h4>
+            <div id="secondaryImpactGrid" class="secondary-grid"></div>
+          </div>
+
+          <div>
+            <h4 class="subheading">Decision log</h4>
+            <div id="decisionLog" class="decision-log"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
