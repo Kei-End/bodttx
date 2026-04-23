@@ -12,128 +12,82 @@
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <div>
-        <div class="eyebrow">Stateless boardroom simulator</div>
-        <h1>Cyber Crisis TTX</h1>
-      </div>
-      <div class="topbar-actions">
-        <button id="resetSessionBtn" class="btn btn-ghost">Reset Session</button>
-      </div>
+      <div><div class="eyebrow">Stateless boardroom simulator</div><h1>Cyber Crisis TTX</h1></div>
+      <div class="topbar-actions"><button id="resetSessionBtn" class="btn btn-ghost">Reset Session</button></div>
     </header>
 
     <main class="layout">
       <section id="loginView" class="panel hero-panel active-view">
-        <div class="hero-copy">
-          <span class="pill pill-accent">Executive exercise</span>
-          <h2>Action, consequence, and national detriment.</h2>
-          <p>This boardroom table-top app is built for CEO and Board-level cyber crisis discussion. It does not mark decisions as right or wrong. It shows how each choice shapes national detriment, service delivery, public trust, financial strain, and market confidence.</p>
-        </div>
-
+        <div class="hero-copy"><span class="pill pill-accent">Executive exercise</span><h2>Action, consequence, and national detriment.</h2><p>This boardroom table-top app is built for CEO and Board-level cyber crisis discussion. It does not mark decisions as right or wrong. It shows how each choice shapes national detriment and decision capability.</p></div>
         <form id="loginForm" class="login-card">
           <div class="card-title">Start Session</div>
-          <label>
-            <span>Name or role</span>
-            <input id="displayName" type="text" placeholder="Chief Executive, Board Chair, Crisis Director" required maxlength="60" />
-          </label>
-          <label>
-            <span>Scenario bank</span>
-            <select id="scenarioSelect"></select>
-          </label>
-          <div class="upload-box">
-            <label for="scenarioUpload" class="upload-label">Or load your own scenario JSON</label>
-            <input id="scenarioUpload" type="file" accept="application/json" />
-            <small>Nothing is stored. Custom scenarios remain in this browser session only.</small>
-          </div>
+          <label><span>Name or role</span><input id="displayName" type="text" placeholder="Chief Executive, Board Chair, Crisis Director" required maxlength="60" /></label>
+          <label><span>Scenario bank</span><select id="scenarioSelect"></select></label>
+          <div class="upload-box"><label for="scenarioUpload" class="upload-label">Or load your own scenario JSON</label><input id="scenarioUpload" type="file" accept="application/json" /><small>Nothing is stored. Custom scenarios remain in this browser session only.</small></div>
           <button type="submit" class="btn btn-primary btn-wide">Enter Exercise</button>
         </form>
       </section>
 
       <section id="exerciseView" class="exercise-grid hidden">
         <aside class="panel sidebar">
-          <div class="scenario-meta">
-            <span class="pill">Scenario</span>
-            <h3 id="scenarioTitle">-</h3>
-            <p id="scenarioSummary">-</p>
-          </div>
-
-          <div class="progress-block">
-            <div class="progress-header">
-              <span>Progress</span>
-              <span id="progressText">0 / 0</span>
-            </div>
-            <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
-          </div>
-
+          <div class="scenario-meta"><span class="pill">Scenario</span><h3 id="scenarioTitle">-</h3><p id="scenarioSummary">-</p></div>
+          <div class="progress-block"><div class="progress-header"><span>Progress</span><span id="progressText">0 / 0</span></div><div class="progress-track"><div id="progressBar" class="progress-fill"></div></div></div>
           <div class="impact-mini-grid" id="miniPillarGrid"></div>
-
+          <div class="session-card"><div class="session-label">Participant</div><div id="participantLabel" class="session-value">-</div></div>
           <div class="session-card">
-            <div class="session-label">Participant</div>
-            <div id="participantLabel" class="session-value">-</div>
+            <strong>Session export</strong>
+            <div class="button-row"><button id="exportJsonBtn" class="btn btn-ghost">Export JSON</button><button id="exportCsvBtn" class="btn btn-ghost">Export CSV</button></div>
           </div>
         </aside>
 
         <section class="main-column">
           <div class="panel question-panel">
-            <div class="question-topline">
-              <span class="pill pill-accent" id="questionStage">Decision Point</span>
-              <span id="questionNumber">Question 1</span>
-            </div>
-            <h2 id="questionText">-</h2>
-            <p id="questionContext" class="muted">-</p>
-            <div id="answerList" class="answer-list"></div>
-            <div class="question-nav">
-              <button id="prevBtn" class="btn btn-ghost">Previous</button>
-              <button id="nextBtn" class="btn btn-primary">Next</button>
-            </div>
+            <div class="question-topline"><span class="pill pill-accent">Decision Point</span><span id="questionNumber">Question 1</span></div>
+            <h2 id="questionText">-</h2><p id="questionContext" class="muted">-</p><div id="answerList" class="answer-list"></div>
+            <div class="question-nav"><button id="prevBtn" class="btn btn-ghost">Previous</button><button id="nextBtn" class="btn btn-primary">Next</button></div>
           </div>
 
-          <div class="panel consequence-panel">
-            <div class="section-title-row">
-              <h3>Immediate decision reading</h3>
-              <span class="pill pill-neutral">Session only</span>
+          <div class="panel consequence-panel"><div class="section-title-row"><h3>Immediate decision reading</h3><span class="pill pill-neutral">Session only</span></div><div id="decisionInsight" class="insight-box">Select an answer to see the likely trade-off and consequence pattern.</div></div>
+
+          <div id="overallDashboardPanel" class="panel final-dashboard hidden">
+            <div class="section-title-row"><h3>Participant Decision Capability Dashboard</h3><span class="pill pill-accent">Post review</span></div>
+            <p class="muted">Capability and detriment remain separate. Radar shows only capability (0–5 per axis).</p>
+            <div class="score-overview capability-overview">
+              <div class="score-card"><span class="score-label">Overall capability score</span><strong id="capabilityScore">0.00</strong><small>Equal-weighted five-axis score</small></div>
+              <div class="score-card"><span class="score-label">Confidence</span><strong id="capabilityConfidence">0%</strong><small>Evidence and data quality only</small></div>
             </div>
-            <div id="decisionInsight" class="insight-box">Select an answer to see the likely trade-off and consequence pattern.</div>
+            <div class="radar-wrap"><canvas id="overallRadarChart" width="430" height="360" aria-label="Decision capability radar chart"></canvas></div>
+            <div id="radarLegend" class="legend-row"></div>
+            <div id="axisButtons" class="button-row"></div>
+            <div class="strength-weakness-grid">
+              <div class="insight-box"><strong>Strengths</strong><ul id="strengthList" class="bullet-list"></ul></div>
+              <div class="insight-box"><strong>Weaknesses</strong><ul id="weaknessList" class="bullet-list"></ul></div>
+            </div>
+            <div class="insight-box">
+              <strong>Trend across injects</strong>
+              <ul id="trendList" class="bullet-list"></ul>
+            </div>
+            <div class="metrics-grid">
+              <div class="mini-card"><strong>Avg time-to-decision</strong><div id="timeToDecisionMetric">0s</div></div>
+              <div class="mini-card"><strong>Missed critical facts</strong><div id="missedCriticalFactMetric">0</div></div>
+              <div class="mini-card"><strong>Transparency gaps</strong><div id="transparencyGapMetric">0</div></div>
+              <div class="mini-card"><strong>Principle consistency</strong><div id="principleConsistencyMetric">0%</div></div>
+            </div>
           </div>
         </section>
 
         <aside class="panel dashboard-panel">
-          <div class="section-title-row">
-            <h3>Detriment Dashboard</h3>
-            <span class="pill pill-danger">Act 854 lens</span>
-          </div>
-
-          <div class="score-overview">
-            <div class="score-card">
-              <span class="score-label">National Detriment Score</span>
-              <strong id="nationalScore">0</strong>
-              <small id="nationalBand">Low</small>
-            </div>
-            <div class="score-card">
-              <span class="score-label">Confidence Index</span>
-              <strong id="confidenceScore">0</strong>
-              <small>Clarity of direction and leadership signalling</small>
-            </div>
-          </div>
-
-          <div>
-            <h4 class="subheading">Pillar heatmap</h4>
-            <div id="pillarBars" class="pillar-bars"></div>
-          </div>
-
-          <div>
-            <h4 class="subheading">Secondary impact monitor</h4>
-            <div id="secondaryImpactGrid" class="secondary-grid"></div>
-          </div>
-
-          <div>
-            <h4 class="subheading">Decision log</h4>
-            <div id="decisionLog" class="decision-log"></div>
-          </div>
+          <div class="section-title-row"><h3>Detriment Dashboard</h3><span class="pill pill-danger">Act 854 lens</span></div>
+          <div class="score-overview"><div class="score-card"><span class="score-label">National Detriment Score</span><strong id="nationalScore">0</strong><small id="nationalBand">Low</small></div><div class="score-card"><span class="score-label">Confidence Index</span><strong id="confidenceScore">0</strong><small>Clarity of direction and leadership signalling</small></div></div>
+          <div><h4 class="subheading">Pillar heatmap</h4><div id="pillarBars" class="pillar-bars"></div></div>
+          <div><h4 class="subheading">Secondary impact monitor</h4><div id="secondaryImpactGrid" class="secondary-grid"></div></div>
+          <div><h4 class="subheading">Decision log</h4><div id="decisionLog" class="decision-log"></div></div>
         </aside>
       </section>
     </main>
   </div>
 
-  <script src="app.js"></script>
+  <dialog id="evidenceModal" class="panel evidence-modal"><div id="evidenceBody"></div><button id="closeEvidenceModalBtn" class="btn btn-primary btn-wide">Close</button></dialog>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

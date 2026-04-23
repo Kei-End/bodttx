@@ -1,0 +1,35 @@
+{
+  "scenario": {
+    "meta": { "id": "fixture-scenario", "title": "Fixture" },
+    "decisionDeadlineSeconds": 180,
+    "criticalFactsAvailable": ["payment switch degraded", "possible lateral movement"],
+    "expectedPrinciples": ["lifeSafetyFirst", "truthfulCommunication"],
+    "stakeholderGroups": ["staff", "vulnerableGroups"],
+    "minimumTransparencyElements": ["known", "unknown", "actions", "guidance", "nextUpdate"],
+    "safetyPriorities": ["life", "staff", "vulnerableGroups"]
+  },
+  "decision": {
+    "decisionId": "d1",
+    "scenarioId": "fixture-scenario",
+    "injectId": "q1",
+    "actorId": "CEO",
+    "actorRole": "CEO",
+    "teamId": "A",
+    "timestamp": 1,
+    "selectedOptionId": "a1",
+    "decisionText": "Known payment switch degraded and possible lateral movement; next likely effect is fuel queue disruption.",
+    "rationaleText": "We apply lifeSafetyFirst and truthfulCommunication with a clear trade-off and mitigation exception path.",
+    "communicationText": "Known: payment instability confirmed. Unknown: full blast radius. Actions: isolate and route essentials. Guidance: customers should use alternate channels. Next update at 14:30.",
+    "principleRefs": ["lifeSafetyFirst"],
+    "namedRisks": ["service continuity"],
+    "namedUnknowns": ["full blast radius"],
+    "namedStakeholders": ["staff", "vulnerable groups"],
+    "safetyConsiderations": ["life", "staff", "mitigation"],
+    "ownerAssignedTo": "Crisis Director",
+    "nextReviewAt": 2,
+    "escalatedTo": "National cyber coordination channel",
+    "facilitatorNotes": "",
+    "evidenceRefs": ["q1", "ops-brief"],
+    "decisionLatencyMs": 120000
+  }
+}

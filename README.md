@@ -4,57 +4,34 @@ A static, mobile-friendly boardroom cyber crisis table-top exercise app built fo
 
 ## Features
 - No backend and no database
-- Session-only storage using `sessionStorage`
+- Session-only storage using versioned `sessionStorage` keys
 - Separate JSON scenario bank
-- Supports 2 to 10 questions per scenario
-- Dashboard centred on Act 854 detriment pillars
-- Secondary impact monitor for reputation, monetary pressure, market share, public trust, and foreign investment
-- Bring-your-own scenario JSON upload
+- Keeps Act 854 detriment scoring model separate from participant capability scoring
+- Five-axis decision-capability radar (0-5): situational awareness, principles alignment, ethical/safety impact, decisiveness, transparency
+- Axis confidence model (0-1) independent from score
+- Validation flags and evidence drawer per axis
+- Team median and target benchmark overlays (max 3 radar series)
+- Trend and board metrics across injects
+- Local JSON/CSV export for after-action review
 
 ## File structure
 - `index.html` - app shell
 - `styles.css` - responsive UI styling
-- `app.js` - exercise logic, scoring, and dashboard
-- `scenarios/sample-scenario.json` - example scenario bank
+- `app.js` - orchestration and UI wiring
+- `decision-schema.js` - capability schema and anchors
+- `capability-scoring.js` - pure capability scoring + confidence logic
+- `chart-adapter.js` - radar chart rendering adapter
+- `session-store.js` - versioned session storage + export builders
+- `scenarios/sample-scenario.json` - example scenario bank with optional capability fields
+- `tests/*.test.mjs` - scoring and storage tests
+- `demos/gold-path-session.json` - manual review demo session
 
-## Deploy to Cloudflare Pages
-1. Create a GitHub repository.
-2. Upload all files while keeping the same folder structure.
-3. In Cloudflare Pages, connect the repository.
-4. Framework preset: `None`
-5. Build command: leave empty
-6. Build output directory: `/`
-7. Deploy.
-
-## Deploy to GitHub Pages
-1. Push the files to a repository.
-2. In repository settings, enable GitHub Pages.
-3. Set source to the root branch.
-4. Wait for the site URL to be published.
-
-## Scenario format
-Each scenario JSON must include:
-- `meta.id`
-- `meta.title`
-- `meta.summary`
-- `questions[]`
-
-Each question must include:
-- `id`
-- `text`
-- `answers[]`
-
-Each answer should include:
-- `id`
-- `label`
-- `description`
-- `consequence`
-- `boardReading`
-- `confidence`
-- `weights.pillars`
-- `weights.secondary`
+## Run tests
+```bash
+node --test tests/*.test.mjs
+```
 
 ## Notes
 - The app does not save participant data after the browser tab is closed.
-- Reset Session clears the current exercise state.
+- Reset Session clears both legacy and v2 session keys.
 - This build is intended for executive training and facilitation, not regulated record retention.

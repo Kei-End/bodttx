@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "participant": "Chief Executive",
+  "scenarioId": "national-payment-grid-ransomware",
+  "index": 3,
+  "completedReview": true,
+  "answers": {
+    "q1": { "answerId": "q1a" },
+    "q2": { "answerId": "q2a" },
+    "q3": { "answerId": "q3a" },
+    "q4": { "answerId": "q4a" }
+  },
+  "decisionRecords": [
+    {
+      "decisionId": "demo-1",
+      "injectId": "q1",
+      "selectedOptionId": "q1a",
+      "scoreBreakdown": {
+        "overallScore": 4.2,
+        "overallConfidence": 0.82,
+        "axes": {
+          "situationalAwareness": { "score": 4, "confidence": 0.8 },
+          "alignmentWithPrinciples": { "score": 4, "confidence": 0.8 },
+          "ethicalSafetyImpact": { "score": 4, "confidence": 0.82 },
+          "decisiveness": { "score": 5, "confidence": 0.84 },
+          "transparency": { "score": 4, "confidence": 0.84 }
+        }
+      },
+      "validationFlags": []
+    }
+  ]
+}
