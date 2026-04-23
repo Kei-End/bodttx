@@ -4,57 +4,42 @@ A static, mobile-friendly boardroom cyber crisis table-top exercise app built fo
 
 ## Features
 - No backend and no database
-- Session-only storage using `sessionStorage`
-- Separate JSON scenario bank
-- Supports 2 to 10 questions per scenario
-- Dashboard centred on Act 854 detriment pillars
-- Secondary impact monitor for reputation, monetary pressure, market share, public trust, and foreign investment
-- Bring-your-own scenario JSON upload
+- Session-only storage using versioned `sessionStorage` keys
+- Separate JSON scenario bank with backward-compatible schema extensions
+- Separate models for:
+  - Capability scoring (5-axis radar, 0-5)
+  - Act 854 detriment scoring (existing pillar dashboard)
+- Decision evidence drawer with validation flags and confidence explanations
+- Team median and target benchmark overlays on the capability radar (max 3 series)
+- Local JSON and CSV export for after-action review
 
 ## File structure
-- `index.html` - app shell
+- `index.html` - app shell and dashboard containers
 - `styles.css` - responsive UI styling
-- `app.js` - exercise logic, scoring, and dashboard
-- `scenarios/sample-scenario.json` - example scenario bank
+- `app.js` - UI orchestration and session flow
+- `schema.js` - typed schema helpers, scenario validation, axis definitions
+- `scoring.js` - pure capability scoring and confidence functions
+- `storage.js` - versioned session storage and rebuild helper
+- `chart-adapter.js` - radar rendering adapter and axis hit detection
+- `scenarios/sample-scenario.json` - example scenario bank (extended schema)
+- `tests/` - unit tests and fixtures
 
-## Deploy to Cloudflare Pages
-1. Create a GitHub repository.
-2. Upload all files while keeping the same folder structure.
-3. In Cloudflare Pages, connect the repository.
-4. Framework preset: `None`
-5. Build command: leave empty
-6. Build output directory: `/`
-7. Deploy.
+## Decision capability scoring pipeline (short)
+1. User selects an answer at each inject.
+2. App builds a typed decision record for that inject.
+3. Pure scoring functions produce:
+   - five axis scores (0-5)
+   - confidence by axis and overall (0-1)
+   - validation flags
+4. Decision records are persisted in sessionStorage.
+5. Dashboard aggregates records into participant capability, trend, and evidence outputs.
+6. Act 854 detriment remains a separate panel and computation path.
 
-## Deploy to GitHub Pages
-1. Push the files to a repository.
-2. In repository settings, enable GitHub Pages.
-3. Set source to the root branch.
-4. Wait for the site URL to be published.
-
-## Scenario format
-Each scenario JSON must include:
-- `meta.id`
-- `meta.title`
-- `meta.summary`
-- `questions[]`
-
-Each question must include:
-- `id`
-- `text`
-- `answers[]`
-
-Each answer should include:
-- `id`
-- `label`
-- `description`
-- `consequence`
-- `boardReading`
-- `confidence`
-- `weights.pillars`
-- `weights.secondary`
+## Test
+```bash
+npm test
+```
 
 ## Notes
-- The app does not save participant data after the browser tab is closed.
-- Reset Session clears the current exercise state.
+- Session reset removes all versioned `boardroomTTXSession:*` keys.
 - This build is intended for executive training and facilitation, not regulated record retention.
