@@ -24,9 +24,42 @@
           "boardReading": "This steadies the narrative and reduces rumour risk, though it may expose leadership to sharper scrutiny if recovery slows.",
           "consequence": "Public trust is protected better, but reputational exposure begins immediately and the media cycle accelerates.",
           "weights": {
-            "pillars": {"security": 8, "defence": 2, "foreign_relations": 3, "economy": 9, "public_health": 4, "public_safety": 4, "public_order": 6, "government_function": 7},
-            "secondary": {"reputation": 8, "monetary": 5, "market_share": 4, "public_trust": 3, "foreign_investment": 4}
-          }
+            "pillars": {
+              "security": 8,
+              "defence": 2,
+              "foreign_relations": 3,
+              "economy": 9,
+              "public_health": 4,
+              "public_safety": 4,
+              "public_order": 6,
+              "government_function": 7
+            },
+            "secondary": {
+              "reputation": 8,
+              "monetary": 5,
+              "market_share": 4,
+              "public_trust": 3,
+              "foreign_investment": 4
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q1b",
@@ -39,9 +72,42 @@
           "boardReading": "This protects accuracy, yet silence can be read as indecision or concealment once disruption becomes visible externally.",
           "consequence": "Forensic clarity improves, but public trust may fall faster if customers discover the issue before leadership speaks.",
           "weights": {
-            "pillars": {"security": 6, "defence": 1, "foreign_relations": 2, "economy": 12, "public_health": 5, "public_safety": 5, "public_order": 9, "government_function": 8},
-            "secondary": {"reputation": 12, "monetary": 7, "market_share": 6, "public_trust": 10, "foreign_investment": 7}
-          }
+            "pillars": {
+              "security": 6,
+              "defence": 1,
+              "foreign_relations": 2,
+              "economy": 12,
+              "public_health": 5,
+              "public_safety": 5,
+              "public_order": 9,
+              "government_function": 8
+            },
+            "secondary": {
+              "reputation": 12,
+              "monetary": 7,
+              "market_share": 6,
+              "public_trust": 10,
+              "foreign_investment": 7
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q1c",
@@ -54,9 +120,42 @@
           "boardReading": "This may buy a short breathing space, but credibility damage becomes sharp if later evidence contradicts the statement.",
           "consequence": "Narrative control is brief, but reputational and trust damage may deepen once the true cause emerges.",
           "weights": {
-            "pillars": {"security": 10, "defence": 2, "foreign_relations": 5, "economy": 14, "public_health": 6, "public_safety": 7, "public_order": 12, "government_function": 10},
-            "secondary": {"reputation": 18, "monetary": 9, "market_share": 8, "public_trust": 17, "foreign_investment": 10}
-          }
+            "pillars": {
+              "security": 10,
+              "defence": 2,
+              "foreign_relations": 5,
+              "economy": 14,
+              "public_health": 6,
+              "public_safety": 7,
+              "public_order": 12,
+              "government_function": 10
+            },
+            "secondary": {
+              "reputation": 18,
+              "monetary": 9,
+              "market_share": 8,
+              "public_trust": 17,
+              "foreign_investment": 10
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         }
       ]
     },
@@ -77,9 +176,42 @@
           "boardReading": "This accepts pain in convenience to defend continuity of essential services and national confidence.",
           "consequence": "Transaction speed slows, but critical service delivery is preserved more steadily across essential sectors.",
           "weights": {
-            "pillars": {"security": 7, "defence": 2, "foreign_relations": 2, "economy": 7, "public_health": 3, "public_safety": 3, "public_order": 4, "government_function": 5},
-            "secondary": {"reputation": 5, "monetary": 6, "market_share": 4, "public_trust": 4, "foreign_investment": 3}
-          }
+            "pillars": {
+              "security": 7,
+              "defence": 2,
+              "foreign_relations": 2,
+              "economy": 7,
+              "public_health": 3,
+              "public_safety": 3,
+              "public_order": 4,
+              "government_function": 5
+            },
+            "secondary": {
+              "reputation": 5,
+              "monetary": 6,
+              "market_share": 4,
+              "public_trust": 4,
+              "foreign_investment": 3
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q2b",
@@ -92,9 +224,42 @@
           "boardReading": "This protects short-term convenience, yet it risks widening compromise and harder downstream disruption.",
           "consequence": "The public sees less immediate disruption, but the chance of deeper service failure rises.",
           "weights": {
-            "pillars": {"security": 16, "defence": 2, "foreign_relations": 3, "economy": 13, "public_health": 7, "public_safety": 8, "public_order": 8, "government_function": 9},
-            "secondary": {"reputation": 8, "monetary": 12, "market_share": 7, "public_trust": 8, "foreign_investment": 6}
-          }
+            "pillars": {
+              "security": 16,
+              "defence": 2,
+              "foreign_relations": 3,
+              "economy": 13,
+              "public_health": 7,
+              "public_safety": 8,
+              "public_order": 8,
+              "government_function": 9
+            },
+            "secondary": {
+              "reputation": 8,
+              "monetary": 12,
+              "market_share": 7,
+              "public_trust": 8,
+              "foreign_investment": 6
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q2c",
@@ -107,9 +272,42 @@
           "boardReading": "This may shorten technical risk, yet it imposes broad national friction and may trigger panic behaviour.",
           "consequence": "Security containment improves, but service disruption spreads quickly across the economy and public order domain.",
           "weights": {
-            "pillars": {"security": 5, "defence": 2, "foreign_relations": 3, "economy": 18, "public_health": 10, "public_safety": 9, "public_order": 15, "government_function": 12},
-            "secondary": {"reputation": 10, "monetary": 18, "market_share": 9, "public_trust": 10, "foreign_investment": 9}
-          }
+            "pillars": {
+              "security": 5,
+              "defence": 2,
+              "foreign_relations": 3,
+              "economy": 18,
+              "public_health": 10,
+              "public_safety": 9,
+              "public_order": 15,
+              "government_function": 12
+            },
+            "secondary": {
+              "reputation": 10,
+              "monetary": 18,
+              "market_share": 9,
+              "public_trust": 10,
+              "foreign_investment": 9
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         }
       ]
     },
@@ -130,9 +328,42 @@
           "boardReading": "This strengthens unity of effort and gives government the room to help before wider harm sets in.",
           "consequence": "Coordination burden increases, but national response alignment improves and downstream harm may be reduced.",
           "weights": {
-            "pillars": {"security": 5, "defence": 3, "foreign_relations": 2, "economy": 6, "public_health": 3, "public_safety": 3, "public_order": 4, "government_function": 4},
-            "secondary": {"reputation": 4, "monetary": 5, "market_share": 3, "public_trust": 3, "foreign_investment": 3}
-          }
+            "pillars": {
+              "security": 5,
+              "defence": 3,
+              "foreign_relations": 2,
+              "economy": 6,
+              "public_health": 3,
+              "public_safety": 3,
+              "public_order": 4,
+              "government_function": 4
+            },
+            "secondary": {
+              "reputation": 4,
+              "monetary": 5,
+              "market_share": 3,
+              "public_trust": 3,
+              "foreign_investment": 3
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q3b",
@@ -145,9 +376,42 @@
           "boardReading": "This may feel controlled, but it narrows the room for coordinated national protection measures.",
           "consequence": "Escalation burden is avoided, yet national preparedness and response synchronisation weaken.",
           "weights": {
-            "pillars": {"security": 10, "defence": 4, "foreign_relations": 4, "economy": 11, "public_health": 6, "public_safety": 6, "public_order": 9, "government_function": 10},
-            "secondary": {"reputation": 11, "monetary": 8, "market_share": 6, "public_trust": 12, "foreign_investment": 7}
-          }
+            "pillars": {
+              "security": 10,
+              "defence": 4,
+              "foreign_relations": 4,
+              "economy": 11,
+              "public_health": 6,
+              "public_safety": 6,
+              "public_order": 9,
+              "government_function": 10
+            },
+            "secondary": {
+              "reputation": 11,
+              "monetary": 8,
+              "market_share": 6,
+              "public_trust": 12,
+              "foreign_investment": 7
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         }
       ]
     },
@@ -168,9 +432,42 @@
           "boardReading": "This preserves long-term posture and credibility, though short-term business pain may rise.",
           "consequence": "Recovery may be harder in the near term, but extortion exposure and future coercion risk are reduced.",
           "weights": {
-            "pillars": {"security": 7, "defence": 3, "foreign_relations": 2, "economy": 10, "public_health": 5, "public_safety": 5, "public_order": 6, "government_function": 7},
-            "secondary": {"reputation": 6, "monetary": 10, "market_share": 5, "public_trust": 5, "foreign_investment": 4}
-          }
+            "pillars": {
+              "security": 7,
+              "defence": 3,
+              "foreign_relations": 2,
+              "economy": 10,
+              "public_health": 5,
+              "public_safety": 5,
+              "public_order": 6,
+              "government_function": 7
+            },
+            "secondary": {
+              "reputation": 6,
+              "monetary": 10,
+              "market_share": 5,
+              "public_trust": 5,
+              "foreign_investment": 4
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q4b",
@@ -183,9 +480,42 @@
           "boardReading": "This may seem practical, but it creates major credibility, legal, and precedent risks if exposed.",
           "consequence": "A quicker restoration path may emerge, yet trust, reputation, and future coercion risk may worsen sharply.",
           "weights": {
-            "pillars": {"security": 14, "defence": 3, "foreign_relations": 5, "economy": 12, "public_health": 6, "public_safety": 6, "public_order": 8, "government_function": 9},
-            "secondary": {"reputation": 18, "monetary": 14, "market_share": 9, "public_trust": 18, "foreign_investment": 11}
-          }
+            "pillars": {
+              "security": 14,
+              "defence": 3,
+              "foreign_relations": 5,
+              "economy": 12,
+              "public_health": 6,
+              "public_safety": 6,
+              "public_order": 8,
+              "government_function": 9
+            },
+            "secondary": {
+              "reputation": 18,
+              "monetary": 14,
+              "market_share": 9,
+              "public_trust": 18,
+              "foreign_investment": 11
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         },
         {
           "id": "q4c",
@@ -198,11 +528,105 @@
           "boardReading": "This may calm some customers in the immediate moment, yet it raises strong strategic and signalling concerns.",
           "consequence": "Speed may improve, but precedent, moral hazard, and public confidence in governance may erode.",
           "weights": {
-            "pillars": {"security": 17, "defence": 4, "foreign_relations": 6, "economy": 10, "public_health": 5, "public_safety": 5, "public_order": 7, "government_function": 8},
-            "secondary": {"reputation": 15, "monetary": 16, "market_share": 7, "public_trust": 14, "foreign_investment": 10}
-          }
+            "pillars": {
+              "security": 17,
+              "defence": 4,
+              "foreign_relations": 6,
+              "economy": 10,
+              "public_health": 5,
+              "public_safety": 5,
+              "public_order": 7,
+              "government_function": 8
+            },
+            "secondary": {
+              "reputation": 15,
+              "monetary": 16,
+              "market_share": 7,
+              "public_trust": 14,
+              "foreign_investment": 10
+            }
+          },
+          "principleRefs": [
+            "truthful-communication"
+          ],
+          "namedRisks": [
+            "service continuity",
+            "public confidence"
+          ],
+          "namedUnknowns": [
+            "full compromise scope"
+          ],
+          "safetyConsiderations": [
+            "life",
+            "staff",
+            "customers",
+            "vulnerableGroups"
+          ],
+          "ownerAssignedTo": "Crisis Lead",
+          "escalatedTo": "Government Coordination Cell"
         }
       ]
     }
-  ]
+  ],
+  "decisionObjectives": [
+    "Protect life and critical services",
+    "Preserve public trust through transparent communication"
+  ],
+  "decisionDeadlineSeconds": 900,
+  "criticalFactsAvailable": [
+    "core-switch-degraded",
+    "lateral-movement-suspected",
+    "critical-sectors-affected"
+  ],
+  "criticalFactsHidden": [
+    "backup-environment-integrity-unknown"
+  ],
+  "expectedPrinciples": [
+    "life-safety-first",
+    "truthful-communication",
+    "proportionate-response"
+  ],
+  "stakeholderGroups": [
+    "customers",
+    "staff",
+    "regulators",
+    "government",
+    "vulnerableGroups"
+  ],
+  "minimumTransparencyElements": [
+    "known",
+    "unknown",
+    "actions",
+    "guidance",
+    "nextUpdate"
+  ],
+  "safetyPriorities": [
+    "life",
+    "staff",
+    "customers",
+    "vulnerableGroups",
+    "public"
+  ],
+  "scoringHints": {
+    "situationalAwareness": [
+      "Name critical facts available",
+      "State unknowns"
+    ],
+    "alignmentWithPrinciples": [
+      "Reference principle",
+      "Avoid unsupported conclusions"
+    ],
+    "ethicalSafetyImpact": [
+      "Prioritise life and vulnerable groups",
+      "Add mitigation steps"
+    ],
+    "decisiveness": [
+      "Assign owner",
+      "Set review trigger"
+    ],
+    "transparency": [
+      "Known/unknown split",
+      "Next update timing"
+    ]
+  }
 }
