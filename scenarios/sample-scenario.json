@@ -1,53 +1,168 @@
 {
   "meta": {
-    "id": "national-payment-grid-ransomware",
-    "title": "National Payment Grid Under Ransomware Pressure",
-    "summary": "A major payment switch degraded by ransomware. Boardroom decision-making focused on national impact.",
-    "sector": "Financial services / NCII",
-    "difficulty": "Boardroom"
+    "id": "ncii-double-extortion-wildcard",
+    "title": "Operation Glass House: NCII Double Extortion",
+    "summary": "A sophisticated threat actor has breached a National Critical Information Infrastructure (NCII) hub. The crisis evolves from a standard ransomware lockout to a personal, high-stakes psychological war targeting the Board directly.",
+    "sector": "NCII / Critical Infrastructure",
+    "difficulty": "Boardroom / Executive"
   },
   "questions": [
     {
       "id": "q1",
-      "shortLabel": "Public disclosure timing",
-      "text": "What public posture should leadership take in the first hour?",
+      "shortLabel": "Strategic Signal",
+      "text": "Early monitoring detects anomalous encryption on non-critical back-office servers. Technical teams request a partial 'protective' shutdown of external gateways. What is your strategic directive?",
+      "context": "A shutdown protects the core but immediately halts public-facing revenue collection and service dashboards.",
       "answers": [
         {
           "id": "q1a",
-          "label": "Issue a controlled early holding statement",
-          "description": "Acknowledge disruption and commit to regular updates.",
-          "confidence": 24,
-          "boardReading": "Steadies the narrative and reduces rumor risk.",
-          "consequence": "Public trust is protected, but media cycle accelerates.",
+          "label": "Prioritize Containment: Authorize immediate gateway shutdown",
+          "description": "Accept service disruption to prevent potential lateral movement into critical control systems.",
+          "confidence": 20,
+          "boardReading": "Conservative and safety-first. Minimizes technical risk but creates immediate public visibility.",
+          "consequence": "Lateral movement is slowed, but media starts asking questions about the 'outage' within minutes.",
           "weights": {
-            "pillars": {"security": 8, "economy": 9, "public_order": 6, "government_function": 7},
-            "secondary": {"reputation": 8, "public_trust": 3},
-            "capability": {
-              "situationalAwareness": 4,
-              "alignmentWithPrinciples": 5,
-              "ethicalSafetyImpact": 3,
-              "decisiveness": 5,
-              "transparency": 5
-            }
+            "pillars": {"security": 5, "economy": 12, "government_function": 10},
+            "capability": {"situationalAwareness": 5, "alignmentWithPrinciples": 4, "ethicalSafetyImpact": 4, "decisiveness": 5, "transparency": 3}
           }
         },
         {
           "id": "q1b",
-          "label": "Stay silent until technical certainty is higher",
-          "description": "Delay communication until impact is better understood.",
-          "confidence": 15,
-          "boardReading": "Protects accuracy but risks being seen as indecisive.",
-          "consequence": "Forensic clarity improves, but trust falls if discovered early.",
+          "label": "Prioritize Continuity: Maintain services while monitoring",
+          "description": "Instruct teams to isolate affected servers without a full gateway block to avoid public panic.",
+          "confidence": 12,
+          "boardReading": "Aggressive continuity focus. Risks a wider breach for the sake of 'business as usual' appearance.",
+          "consequence": "Service stays up, but the attacker uses the open gateways to exfiltrate 500GB of sensitive data.",
           "weights": {
-            "pillars": {"security": 6, "economy": 12, "public_order": 9, "government_function": 8},
-            "secondary": {"reputation": 12, "public_trust": 10},
-            "capability": {
-              "situationalAwareness": 3,
-              "alignmentWithPrinciples": 2,
-              "ethicalSafetyImpact": 2,
-              "decisiveness": 1,
-              "transparency": 1
-            }
+            "pillars": {"security": 18, "economy": 5, "government_function": 5},
+            "capability": {"situationalAwareness": 2, "alignmentWithPrinciples": 3, "ethicalSafetyImpact": 2, "decisiveness": 3, "transparency": 2}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "shortLabel": "Double Extortion Pivot",
+      "text": "The attacker confirms they have exfiltrated unencrypted sensitive data, including customer records and internal Board minutes. They demand $10M or they will leak the data. How do you respond?",
+      "context": "This is no longer just a technical lockout; it is a data liability and reputational crisis.",
+      "answers": [
+        {
+          "id": "q2a",
+          "label": "Engage Law Enforcement and refuse negotiation",
+          "description": "Maintain a 'No Pay' policy, accelerate data breach notification protocols.",
+          "confidence": 25,
+          "boardReading": "Principled and legally defensive. Expects high reputational damage but avoids funding crime.",
+          "consequence": "The attacker begins leaking small 'proof samples' to dark web forums to increase pressure.",
+          "weights": {
+            "pillars": {"security": 5, "foreign_relations": 8, "public_order": 10},
+            "capability": {"situationalAwareness": 4, "alignmentWithPrinciples": 5, "ethicalSafetyImpact": 4, "decisiveness": 5, "transparency": 4}
+          }
+        },
+        {
+          "id": "q2b",
+          "label": "Appoint a professional negotiator to stall",
+          "description": "Open a dialogue to buy time for technical recovery, without promising payment.",
+          "confidence": 18,
+          "boardReading": "Tactical. Buys the technical team 24 hours but risks escalating the attacker's aggression.",
+          "consequence": "The attacker grows impatient and realizes they are being stalled.",
+          "weights": {
+            "pillars": {"security": 10, "economy": 8},
+            "capability": {"situationalAwareness": 4, "alignmentWithPrinciples": 3, "ethicalSafetyImpact": 3, "decisiveness": 4, "transparency": 2}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "shortLabel": "Wildcard: Personal Threats",
+      "text": "WILDCARD: Several Board members receive encrypted messages containing current photos of their children and home addresses. The attacker threatens 'physical consequences' if the ransom isn't paid within 4 hours.",
+      "context": "The crisis has moved from the office to the home. Personal safety is now at stake.",
+      "answers": [
+        {
+          "id": "q3a",
+          "label": "Authorize emergency protective security for families",
+          "description": "Engage private security and police to protect families while maintaining the corporate refusal to pay.",
+          "confidence": 28,
+          "boardReading": "Separates personal safety from corporate policy. High cost but preserves integrity.",
+          "consequence": "The Board remains united but under extreme psychological strain; the attacker prepares a media 'bomb'.",
+          "weights": {
+            "pillars": {"public_safety": 5, "public_order": 5, "economy": 5},
+            "capability": {"situationalAwareness": 5, "alignmentWithPrinciples": 5, "ethicalSafetyImpact": 5, "decisiveness": 4, "transparency": 3}
+          }
+        },
+        {
+          "id": "q3b",
+          "label": "Discuss 'Continuity Payment' as a safety measure",
+          "description": "Consider paying the ransom solely to end the personal threat to family members.",
+          "confidence": 8,
+          "boardReading": "Safety-first but high strategic risk. Sets a precedent for future physical extortion.",
+          "consequence": "The payment is made, but the attacker leaks the data anyway, proving they are unreliable.",
+          "weights": {
+            "pillars": {"security": 25, "economy": 15, "government_function": 12},
+            "capability": {"situationalAwareness": 2, "alignmentWithPrinciples": 1, "ethicalSafetyImpact": 4, "decisiveness": 3, "transparency": 1}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "shortLabel": "The Media Leak",
+      "text": "WILDCARD: A major press outlet receives an anonymous tip-off including the exfiltrated Board minutes and the news of the personal threats. They demand a statement 'coming clean' about the breach scope.",
+      "context": "The 'Glass House' has shattered. Silence is no longer an option.",
+      "answers": [
+        {
+          "id": "q4a",
+          "label": "Full Transparency: Hold a live press conference",
+          "description": "Acknowledge the breach, the data theft, and the appalling personal threats. State the refusal to be coerced.",
+          "confidence": 30,
+          "boardReading": "Radical transparency. Aims to seize the narrative and garner public sympathy against the 'terrorist' tactics.",
+          "consequence": "Reputational hit is massive, but public trust begins to stabilize as the organization is seen as a victim of extreme crime.",
+          "weights": {
+            "pillars": {"public_order": 4, "government_function": 5, "economy": 12},
+            "capability": {"situationalAwareness": 5, "alignmentWithPrinciples": 5, "ethicalSafetyImpact": 4, "decisiveness": 5, "transparency": 5}
+          }
+        },
+        {
+          "id": "q4b",
+          "label": "Controlled Response: Issue a written legal statement",
+          "description": "Confirm an 'incident' is under investigation and warn the press about publishing stolen data.",
+          "confidence": 14,
+          "boardReading": "Legalistic and protective. Likely to be seen as a cover-up by the public and the press.",
+          "consequence": "The press publishes the leaked minutes regardless; the organization looks deceptive and out of touch.",
+          "weights": {
+            "pillars": {"public_trust": 20, "reputation": 18, "economy": 14},
+            "capability": {"situationalAwareness": 3, "alignmentWithPrinciples": 2, "ethicalSafetyImpact": 3, "decisiveness": 2, "transparency": 1}
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "shortLabel": "Containment & Recovery",
+      "text": "Technical teams have identified the entry point and prepared a clean rebuild. Government agencies offer to assist in 'offensive' countermeasures against the actor. Do you authorize state intervention?",
+      "context": "This moves the organization into the realm of national security and international relations.",
+      "answers": [
+        {
+          "id": "q5a",
+          "label": "Full State Integration: Hand over all logs and access",
+          "description": "Allow national security agencies to lead the counter-response and recovery.",
+          "confidence": 26,
+          "boardReading": "Responsible NCII governance. Recognizes this as a national threat, not just a corporate one.",
+          "consequence": "Recovery is slow but secure; the incident is framed as a matter of national resilience.",
+          "weights": {
+            "pillars": {"security": 5, "defence": 5, "foreign_relations": 8, "government_function": 4},
+            "capability": {"situationalAwareness": 5, "alignmentWithPrinciples": 4, "ethicalSafetyImpact": 5, "decisiveness": 5, "transparency": 4}
+          }
+        },
+        {
+          "id": "q5b",
+          "label": "Independent Recovery: Rebuild internally",
+          "description": "Focus on getting services back up using internal teams to avoid government overreach/scrutiny.",
+          "confidence": 18,
+          "boardReading": "Insular. May be faster in the short term but lacks the 'shield' of state protection for future threats.",
+          "consequence": "Systems come back online, but the underlying actor remains active and poised for a second strike.",
+          "weights": {
+            "pillars": {"security": 15, "government_function": 8},
+            "capability": {"situationalAwareness": 3, "alignmentWithPrinciples": 3, "ethicalSafetyImpact": 2, "decisiveness": 4, "transparency": 2}
           }
         }
       ]
