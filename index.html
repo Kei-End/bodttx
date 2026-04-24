@@ -27,7 +27,7 @@
         <div class="hero-copy">
           <span class="pill pill-accent">Executive exercise</span>
           <h2>Action, consequence, and national detriment.</h2>
-          <p>This boardroom table-top app is built for CEO and Board-level cyber crisis discussion. It does not mark decisions as right or wrong. It shows how each choice shapes national detriment, service delivery, public trust, financial strain, and market confidence.</p>
+          <p>This boardroom table-top app is built for CEO and Board-level cyber crisis discussion. It shows how each choice shapes national detriment, service delivery, public trust, financial strain, and market confidence.</p>
         </div>
 
         <form id="loginForm" class="login-card">
@@ -98,7 +98,7 @@
               <h3>Immediate decision reading</h3>
               <span class="pill pill-neutral">Session only</span>
             </div>
-            <div id="decisionInsight" class="insight-box">Select an answer to see the likely trade-off and consequence pattern.</div>
+            <div id="decisionInsight" class="insight-box">Select an answer to see the trade-offs.</div>
           </div>
         </section>
 
@@ -138,6 +138,40 @@
         </aside>
       </section>
     </main>
+  </div>
+
+  <div id="resultsModal" class="modal-overlay hidden">
+    <div class="modal-content panel">
+      <div class="modal-header">
+        <div class="section-title-row">
+          <h2>Session Performance Summary</h2>
+          <span class="pill pill-accent">Exercise Complete</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="results-grid">
+          <div class="results-main">
+            <div class="radar-container large-radar">
+              <canvas id="resultsRadar"></canvas>
+            </div>
+          </div>
+          <div class="results-stats">
+            <div class="score-card">
+              <span class="score-label">Final Detriment</span>
+              <strong id="finalNationalScore">0</strong>
+            </div>
+            <div class="score-card">
+              <span class="score-label">Confidence Index</span>
+              <strong id="finalConfidenceScore">0</strong>
+            </div>
+          </div>
+        </div>
+        <div id="performanceNote" class="insight-box"></div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="window.location.reload()" class="btn btn-primary btn-wide">Restart Exercise</button>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
