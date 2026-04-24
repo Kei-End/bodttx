@@ -17,6 +17,15 @@ const SECONDARY = [
   { key: 'foreign_investment', label: 'Foreign Investment' }
 ];
 
+// NEW: Capability Axes from the Decision Matrix PDF 
+const CAPABILITY_AXES = [
+  { key: 'situationalAwareness', label: 'Situational Awareness' },
+  { key: 'alignmentWithPrinciples', label: 'Principle Alignment' },
+  { key: 'ethicalSafetyImpact', label: 'Ethical & Safety' },
+  { key: 'decisiveness', label: 'Decisiveness' },
+  { key: 'transparency', label: 'Transparency' }
+];
+
 const scenarioSelect = document.getElementById('scenarioSelect');
 const scenarioUpload = document.getElementById('scenarioUpload');
 const loginForm = document.getElementById('loginForm');
@@ -39,13 +48,13 @@ const confidenceScore = document.getElementById('confidenceScore');
 const nationalBand = document.getElementById('nationalBand');
 const progressText = document.getElementById('progressText');
 const progressBar = document.getElementById('progressBar');
-const miniPillarGrid = document.getElementById('miniPillarGrid');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const resetSessionBtn = document.getElementById('resetSessionBtn');
 
 let scenarioLibrary = [];
 let activeScenario = null;
+let capabilityChart = null; // Chart.js instance
 let state = {
   participant: '',
   index: 0,
@@ -55,13 +64,49 @@ let state = {
 async function boot() {
   const files = ['scenarios/sample-scenario.json'];
   const loaded = await Promise.all(files.map(async (path) => {
-    const res = await fetch(path);
-    return res.json();
+    try {
+      const res = await fetch(path);
+      return res.json();
+    } catch (e) { return null; }
   }));
-  scenarioLibrary = loaded;
+  scenarioLibrary = loaded.filter(s => s !== null);
   populateScenarioSelect();
   hydrateSession();
   renderStaticDashboardShell();
+  initRadarChart(); // Initialize Chart.js
+}
+
+function initRadarChart() {
+  const ctx = document.getElementById('capabilityRadar').getContext('2d');
+  capabilityChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: CAPABILITY_AXES.map(a => a.label),
+      datasets: [{
+        label: 'Participant Capability',
+        data: [0, 0, 0, 0, 0],
+        backgroundColor: 'rgba(59, 162, 255, 0.2)',
+        borderColor: '#3ba2ff',
+        pointBackgroundColor: '#68e1fd',
+        borderWidth: 2,
+        pointRadius: 3
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          min: 0,
+          max: 5, // 0-5 behavioral scale [cite: 130]
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          angleLines: { color: 'rgba(255,255,255,0.1)' },
+          pointLabels: { color: '#9fb2cf', font: { size: 10, family: 'Inter' } }
+        }
+      },
+      plugins: { legend: { display: false } },
+      maintainAspectRatio: false
+    }
+  });
 }
 
 function populateScenarioSelect() {
@@ -88,9 +133,7 @@ function hydrateSession() {
         renderAll();
       }
     }
-  } catch (e) {
-    console.warn('Failed to restore session', e);
-  }
+  } catch (e) { console.warn('Failed to restore session', e); }
 }
 
 function persistSession() {
@@ -115,14 +158,6 @@ function showExercise() {
 }
 
 function renderStaticDashboardShell() {
-  miniPillarGrid.innerHTML = PILLARS.map(p => `
-    <div class="mini-card">
-      <strong>${p.label}</strong>
-      <div class="meter"><span id="mini-${p.key}"></span></div>
-      <div class="meter-label"><span>Exposure</span><span id="mini-label-${p.key}">0</span></div>
-    </div>
-  `).join('');
-
   pillarBars.innerHTML = PILLARS.map(p => `
     <div class="pillar-row">
       <header><span>${p.label}</span><span id="pillar-val-${p.key}">0</span></header>
@@ -151,7 +186,7 @@ function renderQuestion() {
   const question = activeScenario.questions[state.index];
   questionNumber.textContent = `Question ${state.index + 1} of ${activeScenario.questions.length}`;
   questionText.textContent = question.text;
-  questionContext.textContent = question.context || 'Consider the trade-off across national interest, operational continuity, and public confidence.';
+  questionContext.textContent = question.context || 'Consider national interest and operational continuity.';
   progressText.textContent = `${state.index + 1} / ${activeScenario.questions.length}`;
   progressBar.style.width = `${((state.index + 1) / activeScenario.questions.length) * 100}%`;
   prevBtn.disabled = state.index === 0;
@@ -165,11 +200,6 @@ function renderQuestion() {
         <input type="radio" name="answer" value="${answer.id}" ${selected ? 'checked' : ''} />
         <div class="answer-title">${answer.label}</div>
         <div class="answer-desc">${answer.description}</div>
-        <div class="answer-tag-row">
-          <span class="tag">Leadership signal: ${answer.leadershipSignal}</span>
-          <span class="tag">Tempo: ${answer.tempo}</span>
-          <span class="tag">Visibility: ${answer.visibility}</span>
-        </div>
       </label>
     `;
   }).join('');
@@ -185,16 +215,14 @@ function renderQuestion() {
     const selected = question.answers.find(a => a.id === selectedAnswerId);
     renderInsight(selected);
   } else {
-    decisionInsight.textContent = 'Select an answer to see the likely trade-off and consequence pattern.';
+    decisionInsight.textContent = 'Select an answer to see the trade-offs.';
   }
 }
 
 function selectAnswer(question, answerId) {
-  const answer = question.answers.find(a => a.id === answerId);
   state.answers[question.id] = { answerId };
   persistSession();
   renderQuestion();
-  renderInsight(answer);
   renderDashboard();
 }
 
@@ -210,22 +238,39 @@ function aggregateScores() {
   const totals = {
     pillars: Object.fromEntries(PILLARS.map(p => [p.key, 0])),
     secondary: Object.fromEntries(SECONDARY.map(s => [s.key, 0])),
+    capability: Object.fromEntries(CAPABILITY_AXES.map(a => [a.key, 0])), // NEW CAPABILITY MODEL [cite: 123]
     confidence: 0,
     log: []
   };
+
+  const answeredCount = Object.keys(state.answers).length;
+  if (answeredCount === 0) return totals;
 
   activeScenario.questions.forEach((question, idx) => {
     const chosen = state.answers[question.id];
     if (!chosen) return;
     const answer = question.answers.find(a => a.id === chosen.answerId);
+    
+    // Process Detriment model (Act 854) [cite: 124, 126]
     PILLARS.forEach(p => totals.pillars[p.key] += (answer.weights?.pillars?.[p.key] || 0));
     SECONDARY.forEach(s => totals.secondary[s.key] += (answer.weights?.secondary?.[s.key] || 0));
+    
+    // Process Capability model (0-5 scale) [cite: 123, 125]
+    CAPABILITY_AXES.forEach(a => {
+      totals.capability[a.key] += (answer.weights?.capability?.[a.key] || 0);
+    });
+
     totals.confidence += (answer.confidence || 0);
     totals.log.push({
-      title: `Q${idx + 1}: ${question.shortLabel || 'Decision point'}`,
+      title: `Q${idx + 1}: ${question.shortLabel || 'Decision'}`,
       choice: answer.label,
       consequence: answer.consequence
     });
+  });
+
+  // Average capability scores for the radar chart
+  CAPABILITY_AXES.forEach(a => {
+    totals.capability[a.key] = Math.round((totals.capability[a.key] / answeredCount) * 10) / 10;
   });
 
   return totals;
@@ -233,16 +278,22 @@ function aggregateScores() {
 
 function renderDashboard() {
   const totals = aggregateScores();
-  const maxPillar = Math.max(1, ...Object.values(totals.pillars));
-  const maxSecondary = Math.max(1, ...Object.values(totals.secondary));
-  const answeredCount = Object.keys(state.answers).length;
-  const detriment = Math.round(Object.values(totals.pillars).reduce((a,b) => a + b, 0) / Math.max(1, answeredCount));
-  const confidence = Math.max(0, Math.round(totals.confidence / Math.max(1, answeredCount)));
+  const answeredCount = Math.max(1, Object.keys(state.answers).length);
+  const detriment = Math.round(Object.values(totals.pillars).reduce((a,b) => a + b, 0) / answeredCount);
+  const confidence = Math.max(0, Math.round(totals.confidence / answeredCount));
 
   nationalScore.textContent = detriment;
   confidenceScore.textContent = confidence;
   nationalBand.textContent = detriment >= 30 ? 'Severe' : detriment >= 20 ? 'Elevated' : detriment >= 10 ? 'Guarded' : 'Low';
 
+  // Update Radar Chart 
+  if (capabilityChart) {
+    capabilityChart.data.datasets[0].data = CAPABILITY_AXES.map(a => totals.capability[a.key]);
+    capabilityChart.update();
+  }
+
+  // Update Detriment Bars
+  const maxPillar = Math.max(1, ...Object.values(totals.pillars));
   PILLARS.forEach(p => {
     const value = totals.pillars[p.key];
     const width = Math.min(100, (value / maxPillar) * 100);
@@ -250,11 +301,10 @@ function renderDashboard() {
     document.getElementById(`pillar-val-${p.key}`).textContent = value;
     document.getElementById(`pillar-bar-${p.key}`).style.width = `${width}%`;
     document.getElementById(`pillar-bar-${p.key}`).style.background = color;
-    document.getElementById(`mini-${p.key}`).style.width = `${Math.min(100, value)}%`;
-    document.getElementById(`mini-${p.key}`).style.background = color;
-    document.getElementById(`mini-label-${p.key}`).textContent = value;
   });
 
+  // Update Secondary Monitoring
+  const maxSecondary = Math.max(1, ...Object.values(totals.secondary));
   SECONDARY.forEach(s => {
     const value = totals.secondary[s.key];
     const width = Math.min(100, (value / maxSecondary) * 100);
@@ -291,23 +341,11 @@ scenarioUpload.addEventListener('change', async (e) => {
   try {
     const text = await file.text();
     const json = JSON.parse(text);
-    validateScenario(json);
     scenarioLibrary.unshift(json);
     populateScenarioSelect();
     scenarioSelect.value = '0';
-  } catch (err) {
-    alert(`Scenario file could not be loaded: ${err.message}`);
-  }
+  } catch (err) { alert(`Error: ${err.message}`); }
 });
-
-function validateScenario(json) {
-  if (!json.meta?.id || !json.meta?.title || !Array.isArray(json.questions)) {
-    throw new Error('Invalid scenario format.');
-  }
-  if (json.questions.length < 2 || json.questions.length > 10) {
-    throw new Error('Scenario must contain between 2 and 10 questions.');
-  }
-}
 
 prevBtn.addEventListener('click', () => {
   state.index = Math.max(0, state.index - 1);
