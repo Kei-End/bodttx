@@ -2,7 +2,7 @@
   "meta": {
     "id": "ncii-glass-house-v2",
     "title": "Operation Glass House: The NCII Siege",
-    "summary": "A major ransomware group has breached a critical infrastructure node. They are moving from data theft to physical intimidation and public psychological warfare.",
+    "summary": "A ransomware group has breached a critical infrastructure node. They are moving from data theft to physical intimidation and public psychological warfare.",
     "sector": "NCII / Finance / Public Safety",
     "difficulty": "Executive"
   },
@@ -11,13 +11,14 @@
       "id": "q1",
       "shortLabel": "Initial Breach",
       "text": "Early telemetry shows rapid encryption on back-office servers. IT requests a 'Total Isolation' protocol, cutting all internet-facing services immediately.",
-      "context": "Total isolation stops the spread but halts public service delivery and halts $5M in hourly revenue.",
+      "context": "Isolation stops the spread but halts public services and $5M in hourly revenue.",
       "answers": [
         {
           "id": "q1a",
           "label": "Total Isolation",
           "description": "Cut all gateways. Prioritize containment above all else.",
-          "confidence": 25, "boardReading": "Safety-first, but causes immediate national disruption.",
+          "confidence": 25,
+          "boardReading": "Safety-first, but causes immediate national disruption.",
           "consequence": "Breach is contained, but the public starts to panic as services go dark.",
           "weights": {
             "pillars": {"security": 2, "economy": 15, "government_function": 12},
@@ -29,8 +30,9 @@
           "id": "q1b",
           "label": "Partial Isolation",
           "description": "Block only known malicious IPs while keeping core services running.",
-          "confidence": 15, "boardReading": "Risky middle ground; may allow exfiltration to continue.",
-          "consequence": "Services remain up for now, but 200GB of sensitive data is exfiltrated.",
+          "confidence": 15,
+          "boardReading": "Risky middle ground; may allow exfiltration to continue.",
+          "consequence": "Services remain up, but 200GB of sensitive data is exfiltrated.",
           "weights": {
             "pillars": {"security": 12, "economy": 5, "government_function": 4},
             "secondary": {"reputation": 8, "monetary": 5, "market_share": 10},
@@ -41,8 +43,9 @@
           "id": "q1c",
           "label": "Passive Observation",
           "description": "Trace the actor's path without interfering to identify the source.",
-          "confidence": 10, "boardReading": "Highly aggressive intelligence gathering; dangerous if the actor detects you.",
-          "consequence": "You identify the threat actor, but they realize they are watched and trigger a wiper script.",
+          "confidence": 10,
+          "boardReading": "Highly aggressive intel gathering; dangerous if detected.",
+          "consequence": "You identify the actor, but they trigger a wiper script in retaliation.",
           "weights": {
             "pillars": {"security": 25, "defence": 10, "economy": 18},
             "secondary": {"reputation": 15, "monetary": 12, "public_trust": 20},
@@ -55,14 +58,15 @@
       "id": "q2",
       "shortLabel": "Data Extortion",
       "text": "The actor confirms they have exfiltrated the Board's internal salary records and personal emails. They demand $5M to 'delete' the data.",
-      "context": "Payment funds future attacks; refusal guarantees a public leak.",
+      "context": "Payment funds crime; refusal guarantees a public leak.",
       "answers": [
         {
           "id": "q2a",
           "label": "Absolute Refusal",
           "description": "Maintain no-pay policy and prepare for the leak.",
-          "confidence": 28, "boardReading": "Principles over reputation. Protects the national security posture.",
-          "consequence": "The actor leaks the data; several Board members face intense public scrutiny.",
+          "confidence": 28,
+          "boardReading": "Principles over reputation. Protects national deterrence.",
+          "consequence": "The actor leaks the data; Board members face intense public scrutiny.",
           "weights": {
             "pillars": {"security": 2, "foreign_relations": 5, "public_order": 10},
             "secondary": {"reputation": 25, "monetary": 2, "public_trust": 15},
@@ -72,8 +76,9 @@
         {
           "id": "q2b",
           "label": "Negotiate to Buy Time",
-          "description": "Engage a negotiator to stall while technical teams try to locate the leak source.",
-          "confidence": 20, "boardReading": "Tactical pragmatism. Buys time for response coordination.",
+          "description": "Engage a negotiator to stall while teams try to locate the leak source.",
+          "confidence": 20,
+          "boardReading": "Tactical pragmatism. Buys time for response coordination.",
           "consequence": "Stalling works for 12 hours, allowing a forensic snapshot to complete.",
           "weights": {
             "pillars": {"security": 8, "economy": 5},
@@ -84,9 +89,10 @@
         {
           "id": "q2c",
           "label": "Quiet Payment",
-          "description": "Pay the ransom immediately using private insurance to keep the leak silent.",
-          "confidence": 5, "boardReading": "Expedient but creates 'moral hazard'. Attacker now knows you will pay.",
-          "consequence": "Data is theoretically deleted, but the actor returns a month later with a new demand.",
+          "description": "Pay the ransom immediately using private insurance.",
+          "confidence": 5,
+          "boardReading": "Expedient but creates 'moral hazard'. Attacker now knows you pay.",
+          "consequence": "Data is deleted, but the actor returns a month later with a new demand.",
           "weights": {
             "pillars": {"security": 18, "foreign_relations": 12, "economy": 5},
             "secondary": {"reputation": 2, "monetary": 18, "public_trust": 25},
@@ -98,15 +104,16 @@
     {
       "id": "q3",
       "shortLabel": "Personal Safety",
-      "text": "WILDCARD : Attackers send photos of Board members' children at school to their personal phones. They demand an immediate 'Proof of Payment' or 'accidents will happen'.",
-      "context": "This is now a life-safety issue, exceeding standard cyber protocols.",
+      "text": "WILDCARD : Attackers send photos of Board members' children to their personal phones, demanding immediate payment.",
+      "context": "A life-safety issue exceeding standard cyber protocols.",
       "answers": [
         {
           "id": "q3a",
           "label": "State Security Escalation",
-          "description": "Engage high-level Police and Intelligence agencies for home protection.",
-          "confidence": 30, "boardReading": "Correct protocol. Moves personal safety into the domain of state protection.",
-          "consequence": "Families are secured, but the story begins to leak through secondary police channels.",
+          "description": "Engage high-level Police and Intel agencies for home protection.",
+          "confidence": 30,
+          "boardReading": "Correct protocol. Moves safety into the domain of state protection.",
+          "consequence": "Families are secured, but news begins to leak through police channels.",
           "weights": {
             "pillars": {"public_safety": 5, "public_order": 12, "government_function": 5},
             "secondary": {"reputation": 10, "public_trust": 5},
@@ -115,10 +122,11 @@
         },
         {
           "id": "q3b",
-          "label": "Private Security / Shadow Mode",
-          "description": "Hire private tactical teams to secure families without alerting the state.",
-          "confidence": 12, "boardReading": "Insular. Risks miscommunication with official law enforcement.",
-          "consequence": "Security is tight but the actor realizes you are escalating and leaks more data to retaliate.",
+          "label": "Private Security",
+          "description": "Hire private tactical teams without alerting the state.",
+          "confidence": 12,
+          "boardReading": "Insular. Risks miscommunication with official law enforcement.",
+          "consequence": "Security is tight but the actor retaliates with more data leaks.",
           "weights": {
             "pillars": {"security": 10, "public_safety": 15},
             "secondary": {"reputation": 5, "monetary": 15},
@@ -129,8 +137,9 @@
           "id": "q3c",
           "label": "Strategic Surrender",
           "description": "Publicly announce you are paying under duress to save lives.",
-          "confidence": 18, "boardReading": "Human-centric but catastrophic for national deterrence policy.",
-          "consequence": "Lives are saved, but the nation is viewed as vulnerable to physical-cyber extortion.",
+          "confidence": 18,
+          "boardReading": "Human-centric but catastrophic for national deterrence.",
+          "consequence": "Lives are saved, but the nation is viewed as vulnerable to extortion.",
           "weights": {
             "pillars": {"defence": 20, "foreign_relations": 25, "economy": 10},
             "secondary": {"reputation": 15, "monetary": 10, "foreign_investment": 20},
@@ -142,15 +151,16 @@
     {
       "id": "q4",
       "shortLabel": "Media Crisis",
-      "text": "WILDCARD : A major whistleblower site publishes the earlier Board minutes. The press is outside the gates demanding a live interview with the CEO.",
-      "context": "The narrative is slipping. You must choose a communication posture.",
+      "text": "WILDCARD : A whistleblower site publishes the earlier Board minutes. Press is demanding an interview.",
+      "context": "The narrative is slipping; a posture must be chosen.",
       "answers": [
         {
           "id": "q4a",
           "label": "The 'Full Truth' Presser",
           "description": "Host a live conference. Admit the breach and the personal threats.",
-          "confidence": 28, "boardReading": "Radical transparency. Builds public empathy but reveals deep vulnerabilities.",
-          "consequence": "Initial shock gives way to massive public support against the 'cyber terrorists'.",
+          "confidence": 28,
+          "boardReading": "Radical transparency. Builds public empathy.",
+          "consequence": "Initial shock gives way to massive public support against the attackers.",
           "weights": {
             "pillars": {"public_order": 5, "economy": 10},
             "secondary": {"reputation": 18, "public_trust": 5, "foreign_investment": 15},
@@ -160,9 +170,10 @@
         {
           "id": "q4b",
           "label": "Strict Legal Denial",
-          "description": "Issue a written statement denying the 'rumours' of threats and downplaying the minutes.",
-          "confidence": 5, "boardReading": "Old-school 'Deny and Deflect'. High risk of being caught in a lie.",
-          "consequence": "The whistleblower site releases the audio proof. Public trust collapses instantly.",
+          "description": "Issue a written statement denying the 'rumours'.",
+          "confidence": 5,
+          "boardReading": "Old-school 'Deny and Deflect'. High risk of being caught lying.",
+          "consequence": "Whistleblower releases audio proof. Public trust collapses instantly.",
           "weights": {
             "pillars": {"public_order": 20, "government_function": 15, "economy": 25},
             "secondary": {"reputation": 30, "monetary": 12, "public_trust": 30},
@@ -172,9 +183,10 @@
         {
           "id": "q4c",
           "label": "Managed Leak",
-          "description": "Selectively brief one high-tier journalist to frame the organization as the victim.",
-          "confidence": 20, "boardReading": "Strategic communications. Aims to control the narrative tempo.",
-          "consequence": "The coverage is fair, but other media outlets turn hostile because they were excluded.",
+          "description": "Selectively brief one high-tier journalist to frame the org as victim.",
+          "confidence": 20,
+          "boardReading": "Strategic communications. Aims to control the narrative tempo.",
+          "consequence": "Coverage is fair, but other media outlets turn hostile.",
           "weights": {
             "pillars": {"public_order": 10, "economy": 5},
             "secondary": {"reputation": 10, "public_trust": 12, "market_share": 8},
@@ -186,15 +198,16 @@
     {
       "id": "q5",
       "shortLabel": "State Intervention",
-      "text": "National security agencies offer to conduct an 'Offensive Cyber Operation' against the attackers' infrastructure. They need Board authorization to use company systems as a 'jump box'.",
-      "context": "This is a 'hack back'. It is effective but potentially illegal in some jurisdictions.",
+      "text": "Agencies offer to conduct an 'Offensive Cyber Operation' against the attackers using company systems.",
+      "context": "A 'hack back'. Effective but legally complex.",
       "answers": [
         {
           "id": "q5a",
           "label": "Authorize Full State Access",
-          "description": "Collaborate fully. Allow the state to use company infrastructure to strike back.",
-          "confidence": 25, "boardReading": "Whole-of-government defense. Potent but permanently ties you to the state.",
-          "consequence": "The attackers' infrastructure is destroyed. The threat ends, but international tensions rise.",
+          "description": "Collaborate fully with the state to strike back.",
+          "confidence": 25,
+          "boardReading": "Whole-of-government defense. Potent but creates state dependency.",
+          "consequence": "Attackers' infrastructure is destroyed, but int'l tensions rise.",
           "weights": {
             "pillars": {"security": 5, "defence": 5, "foreign_relations": 18},
             "secondary": {"monetary": 5, "foreign_investment": 12},
@@ -204,9 +217,10 @@
         {
           "id": "q5b",
           "label": "Refuse State Access",
-          "description": "Decline. Keep the organization separate from state offensive actions.",
-          "confidence": 18, "boardReading": "Protects private-sector neutrality. Risks being left alone to face the next wave.",
-          "consequence": "The state cannot act. The actor remains at large and pivots to target your suppliers.",
+          "description": "Decline to host offensive actions.",
+          "confidence": 18,
+          "boardReading": "Protects neutrality. Risks being left alone for the next wave.",
+          "consequence": "The state cannot act. The actor pivots to target your suppliers.",
           "weights": {
             "pillars": {"security": 15, "government_function": 10},
             "secondary": {"reputation": 8, "market_share": 15},
@@ -217,8 +231,9 @@
           "id": "q5c",
           "label": "Limited Assistance",
           "description": "Provide data and logs but refuse to host offensive tools.",
-          "confidence": 22, "boardReading": "Measured cooperation. Assists the investigation without active combat.",
-          "consequence": "The investigation moves forward slowly. The actor is identified but not neutralized.",
+          "confidence": 22,
+          "boardReading": "Measured cooperation without active combat.",
+          "consequence": "Investigation moves slowly; actor is not neutralized.",
           "weights": {
             "pillars": {"security": 8, "defence": 10, "economy": 5},
             "secondary": {"reputation": 5, "monetary": 5, "public_trust": 5},
@@ -230,15 +245,16 @@
     {
       "id": "q6",
       "shortLabel": "The Rebuild",
-      "text": "The immediate threat is over. The Board must decide how to rebuild. Do you restore to original speed or invest in 'Security-by-Design' delays?",
-      "context": "Security slows the business down; speed leaves you vulnerable again.",
+      "text": "The threat is over. Do you restore to original speed or invest in 'Security-by-Design'?",
+      "context": "Security slows operations; speed leaves you vulnerable.",
       "answers": [
         {
           "id": "q6a",
           "label": "Security-by-Design",
-          "description": "Implement zero-trust and multi-factor across every layer. Accept a 15% drop in operational speed.",
-          "confidence": 30, "boardReading": "Visionary resilience. Sacrifices short-term efficiency for long-term survival.",
-          "consequence": "The company is now the most secure in the sector. Reputation rebounds as a leader.",
+          "description": "Implement zero-trust. Accept a 15% operational speed drop.",
+          "confidence": 30,
+          "boardReading": "Visionary resilience. Sacrifices short-term efficiency.",
+          "consequence": "Org is now most secure in sector; reputation leader.",
           "weights": {
             "pillars": {"security": 2, "economy": 10, "government_function": 5},
             "secondary": {"reputation": 5, "monetary": 12, "market_share": 5, "public_trust": 2},
@@ -248,20 +264,23 @@
         {
           "id": "q6b",
           "label": "Rapid Restoration",
-          "description": "Get services back to 100% capacity within 24 hours. Minimal new security checks.",
-          "confidence": 5, "boardReading": "Short-sighted. Puts market share above the safety of the organization.",
-          "consequence": "Market confidence returns briefly, but a new phishing attack succeeds within 48 hours.",
+          "description": "Get services back to 100% capacity in 24h.",
+          "confidence": 5,
+          "boardReading": "Short-sighted. Puts market share above org safety.",
+          "consequence": "Confidence returns briefly; a new attack succeeds in 48h.",
           "weights": {
-            "pillars": {"security": 25, "economy": 2}, "secondary": {"reputation": 10, "monetary": 5, "market_share": 2, "public_trust": 20},
+            "pillars": {"security": 25, "economy": 2},
+            "secondary": {"reputation": 10, "monetary": 5, "market_share": 2, "public_trust": 20},
             "capability": {"situationalAwareness": 2, "alignmentWithPrinciples": 1, "ethicalSafetyImpact": 2, "decisiveness": 5, "transparency": 2}
           }
         },
         {
           "id": "q6c",
           "label": "Outsourced Resilience",
-          "description": "Migrate core infrastructure to a third-party managed secure cloud.",
-          "confidence": 20, "boardReading": "Risk transfer. Efficient but creates dependency on a vendor.",
-          "consequence": "Security improves, but you lose granular control over your most critical assets.",
+          "description": "Migrate core infra to a managed secure cloud.",
+          "confidence": 20,
+          "boardReading": "Risk transfer. Efficient but creates vendor dependency.",
+          "consequence": "Security improves but you lose granular control.",
           "weights": {
             "pillars": {"security": 10, "defence": 5, "government_function": 10},
             "secondary": {"monetary": 15, "market_share": 10, "foreign_investment": 5},
