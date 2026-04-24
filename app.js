@@ -17,7 +17,7 @@ const SECONDARY = [
   { key: 'foreign_investment', label: 'Foreign Investment' }
 ];
 
-// NEW: Capability Axes from the Decision Matrix PDF 
+// NEW: Capability Axes from Matrix PDF [cite: 131-135]
 const CAPABILITY_AXES = [
   { key: 'situationalAwareness', label: 'Situational Awareness' },
   { key: 'alignmentWithPrinciples', label: 'Principle Alignment' },
@@ -54,7 +54,7 @@ const resetSessionBtn = document.getElementById('resetSessionBtn');
 
 let scenarioLibrary = [];
 let activeScenario = null;
-let capabilityChart = null; // Chart.js instance
+let capabilityChart = null;
 let state = {
   participant: '',
   index: 0,
@@ -64,16 +64,13 @@ let state = {
 async function boot() {
   const files = ['scenarios/sample-scenario.json'];
   const loaded = await Promise.all(files.map(async (path) => {
-    try {
-      const res = await fetch(path);
-      return res.json();
-    } catch (e) { return null; }
+    try { const res = await fetch(path); return res.json(); } catch (e) { return null; }
   }));
   scenarioLibrary = loaded.filter(s => s !== null);
   populateScenarioSelect();
   hydrateSession();
   renderStaticDashboardShell();
-  initRadarChart(); // Initialize Chart.js
+  initRadarChart();
 }
 
 function initRadarChart() {
@@ -95,8 +92,7 @@ function initRadarChart() {
     options: {
       scales: {
         r: {
-          min: 0,
-          max: 5, // 0-5 behavioral scale [cite: 130]
+          min: 0, max: 5, // 0-5 Scale [cite: 262]
           ticks: { display: false, stepSize: 1 },
           grid: { color: 'rgba(255,255,255,0.1)' },
           angleLines: { color: 'rgba(255,255,255,0.1)' },
@@ -120,7 +116,7 @@ function populateScenarioSelect() {
 }
 
 function hydrateSession() {
-  const saved = sessionStorage.getItem('boardroomTTXSession');
+  const saved = sessionStorage.getItem('boardroomTTXSession'); // Local-only persistence [cite: 114, 269]
   if (!saved) return;
   try {
     const parsed = JSON.parse(saved);
@@ -152,10 +148,7 @@ function resetSession() {
   loginView.classList.remove('hidden');
 }
 
-function showExercise() {
-  loginView.classList.add('hidden');
-  exerciseView.classList.remove('hidden');
-}
+function showExercise() { loginView.classList.add('hidden'); exerciseView.classList.remove('hidden'); }
 
 function renderStaticDashboardShell() {
   pillarBars.innerHTML = PILLARS.map(p => `
@@ -238,7 +231,7 @@ function aggregateScores() {
   const totals = {
     pillars: Object.fromEntries(PILLARS.map(p => [p.key, 0])),
     secondary: Object.fromEntries(SECONDARY.map(s => [s.key, 0])),
-    capability: Object.fromEntries(CAPABILITY_AXES.map(a => [a.key, 0])), // NEW CAPABILITY MODEL [cite: 123]
+    capability: Object.fromEntries(CAPABILITY_AXES.map(a => [a.key, 0])),
     confidence: 0,
     log: []
   };
@@ -251,16 +244,11 @@ function aggregateScores() {
     if (!chosen) return;
     const answer = question.answers.find(a => a.id === chosen.answerId);
     
-    // Process Detriment model (Act 854) [cite: 124, 126]
     PILLARS.forEach(p => totals.pillars[p.key] += (answer.weights?.pillars?.[p.key] || 0));
     SECONDARY.forEach(s => totals.secondary[s.key] += (answer.weights?.secondary?.[s.key] || 0));
-    
-    // Process Capability model (0-5 scale) [cite: 123, 125]
-    CAPABILITY_AXES.forEach(a => {
-      totals.capability[a.key] += (answer.weights?.capability?.[a.key] || 0);
-    });
-
+    CAPABILITY_AXES.forEach(a => totals.capability[a.key] += (answer.weights?.capability?.[a.key] || 0));
     totals.confidence += (answer.confidence || 0);
+
     totals.log.push({
       title: `Q${idx + 1}: ${question.shortLabel || 'Decision'}`,
       choice: answer.label,
@@ -268,7 +256,6 @@ function aggregateScores() {
     });
   });
 
-  // Average capability scores for the radar chart
   CAPABILITY_AXES.forEach(a => {
     totals.capability[a.key] = Math.round((totals.capability[a.key] / answeredCount) * 10) / 10;
   });
@@ -286,13 +273,11 @@ function renderDashboard() {
   confidenceScore.textContent = confidence;
   nationalBand.textContent = detriment >= 30 ? 'Severe' : detriment >= 20 ? 'Elevated' : detriment >= 10 ? 'Guarded' : 'Low';
 
-  // Update Radar Chart 
   if (capabilityChart) {
     capabilityChart.data.datasets[0].data = CAPABILITY_AXES.map(a => totals.capability[a.key]);
     capabilityChart.update();
   }
 
-  // Update Detriment Bars
   const maxPillar = Math.max(1, ...Object.values(totals.pillars));
   PILLARS.forEach(p => {
     const value = totals.pillars[p.key];
@@ -303,7 +288,6 @@ function renderDashboard() {
     document.getElementById(`pillar-bar-${p.key}`).style.background = color;
   });
 
-  // Update Secondary Monitoring
   const maxSecondary = Math.max(1, ...Object.values(totals.secondary));
   SECONDARY.forEach(s => {
     const value = totals.secondary[s.key];
