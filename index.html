@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -64,7 +65,12 @@
             <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
           </div>
 
-          <div class="impact-mini-grid" id="miniPillarGrid"></div>
+          <div class="capability-section">
+            <h4 class="subheading">Decision Capability</h4>
+            <div class="radar-container">
+              <canvas id="capabilityRadar"></canvas>
+            </div>
+          </div>
 
           <div class="session-card">
             <div class="session-label">Participant</div>
