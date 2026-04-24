@@ -17,7 +17,6 @@ const SECONDARY = [
   { key: 'foreign_investment', label: 'Foreign Investment' }
 ];
 
-// NEW: Capability Axes from Matrix PDF [cite: 131-135]
 const CAPABILITY_AXES = [
   { key: 'situationalAwareness', label: 'Situational Awareness' },
   { key: 'alignmentWithPrinciples', label: 'Principle Alignment' },
@@ -55,6 +54,7 @@ const resetSessionBtn = document.getElementById('resetSessionBtn');
 let scenarioLibrary = [];
 let activeScenario = null;
 let capabilityChart = null;
+let resultsChart = null;
 let state = {
   participant: '',
   index: 0,
@@ -80,7 +80,7 @@ function initRadarChart() {
     data: {
       labels: CAPABILITY_AXES.map(a => a.label),
       datasets: [{
-        label: 'Participant Capability',
+        label: 'Capability',
         data: [0, 0, 0, 0, 0],
         backgroundColor: 'rgba(59, 162, 255, 0.2)',
         borderColor: '#3ba2ff',
@@ -92,7 +92,7 @@ function initRadarChart() {
     options: {
       scales: {
         r: {
-          min: 0, max: 5, // 0-5 Scale [cite: 262]
+          min: 0, max: 5,
           ticks: { display: false, stepSize: 1 },
           grid: { color: 'rgba(255,255,255,0.1)' },
           angleLines: { color: 'rgba(255,255,255,0.1)' },
@@ -116,7 +116,7 @@ function populateScenarioSelect() {
 }
 
 function hydrateSession() {
-  const saved = sessionStorage.getItem('boardroomTTXSession'); // Local-only persistence [cite: 114, 269]
+  const saved = sessionStorage.getItem('boardroomTTXSession');
   if (!saved) return;
   try {
     const parsed = JSON.parse(saved);
@@ -178,12 +178,27 @@ function renderAll() {
 function renderQuestion() {
   const question = activeScenario.questions[state.index];
   questionNumber.textContent = `Question ${state.index + 1} of ${activeScenario.questions.length}`;
-  questionText.textContent = question.text;
+  
+  // Highlight WILDCARD text
+  let text = question.text;
+  if (text.includes("WILDCARD :")) {
+    text = text.replace("WILDCARD :", `<span class="wildcard-text">WILDCARD :</span>`);
+  }
+  questionText.innerHTML = text;
+
   questionContext.textContent = question.context || 'Consider national interest and operational continuity.';
   progressText.textContent = `${state.index + 1} / ${activeScenario.questions.length}`;
   progressBar.style.width = `${((state.index + 1) / activeScenario.questions.length) * 100}%`;
+  
   prevBtn.disabled = state.index === 0;
-  nextBtn.textContent = state.index === activeScenario.questions.length - 1 ? 'Finish Review' : 'Next';
+
+  if (state.index === activeScenario.questions.length - 1) {
+    nextBtn.textContent = 'Finish Review';
+    nextBtn.onclick = showPerformanceSummary;
+  } else {
+    nextBtn.textContent = 'Next';
+    nextBtn.onclick = () => { state.index++; renderAll(); persistSession(); };
+  }
 
   const selectedAnswerId = state.answers[question.id]?.answerId;
   answerList.innerHTML = question.answers.map(answer => {
@@ -288,10 +303,10 @@ function renderDashboard() {
     document.getElementById(`pillar-bar-${p.key}`).style.background = color;
   });
 
-  const maxSecondary = Math.max(1, ...Object.values(totals.secondary));
+  const FIXED_SEC_MAX = 50; 
   SECONDARY.forEach(s => {
     const value = totals.secondary[s.key];
-    const width = Math.min(100, (value / maxSecondary) * 100);
+    const width = Math.min(100, (value / FIXED_SEC_MAX) * 100);
     const color = value >= 20 ? 'var(--bad)' : value >= 12 ? 'var(--warn)' : 'var(--good)';
     document.getElementById(`secondary-bar-${s.key}`).style.width = `${width}%`;
     document.getElementById(`secondary-bar-${s.key}`).style.background = color;
@@ -306,6 +321,47 @@ function renderDashboard() {
         </div>
       `).join('')
     : '<div class="log-item"><p>No decisions recorded yet.</p></div>';
+}
+
+function showPerformanceSummary() {
+  const totals = aggregateScores();
+  document.getElementById('resultsModal').classList.remove('hidden');
+
+  document.getElementById('finalNationalScore').textContent = document.getElementById('nationalScore').textContent;
+  document.getElementById('finalConfidenceScore').textContent = document.getElementById('confidenceScore').textContent;
+
+  const ctx = document.getElementById('resultsRadar').getContext('2d');
+  const radarData = CAPABILITY_AXES.map(a => totals.capability[a.key]);
+  
+  if (resultsChart) {
+    resultsChart.data.datasets[0].data = radarData;
+    resultsChart.update();
+  } else {
+    resultsChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: CAPABILITY_AXES.map(a => a.label),
+        datasets: [{
+          label: 'Final Profile',
+          data: radarData,
+          backgroundColor: 'rgba(59, 162, 255, 0.4)',
+          borderColor: '#3ba2ff',
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: { r: { min: 0, max: 5, ticks: { display: false } } },
+        plugins: { legend: { display: false } },
+        maintainAspectRatio: false
+      }
+    });
+  }
+
+  const avgCap = radarData.reduce((a, b) => a + b, 0) / 5;
+  let note = avgCap >= 4 ? "Exceptional resilience. Your profile shows anticipatory leadership." :
+             avgCap >= 3 ? "Adequate defense. You balanced principles with continuity effectively." :
+             "Fragile posture. Decisions were reactive and lacked strategic depth.";
+  document.getElementById('performanceNote').textContent = note;
 }
 
 loginForm.addEventListener('submit', (e) => {
@@ -333,12 +389,6 @@ scenarioUpload.addEventListener('change', async (e) => {
 
 prevBtn.addEventListener('click', () => {
   state.index = Math.max(0, state.index - 1);
-  persistSession();
-  renderQuestion();
-});
-
-nextBtn.addEventListener('click', () => {
-  state.index = Math.min(activeScenario.questions.length - 1, state.index + 1);
   persistSession();
   renderQuestion();
 });
