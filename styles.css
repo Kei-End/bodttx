@@ -55,6 +55,18 @@ input, select { border: 1px solid rgba(255,255,255,0.12); background: rgba(6,12,
 .answer-tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { padding: 6px 10px; border-radius: 999px; font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.12); color: #c9d6ea; }
 
+/* Radar Section */
+.capability-section {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.radar-container {
+  width: 100%;
+  max-width: 240px;
+  margin: 10px auto;
+  aspect-ratio: 1;
+}
+
 .progress-track { width: 100%; background: rgba(255,255,255,0.08); border-radius: 999px; height: 10px; overflow: hidden; }
 .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
 
